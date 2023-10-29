@@ -71,3 +71,9 @@ const tree = parser.programa();
 
 const listener = new CustomListener();
 antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+
+console.log("== Tabla de Variables ==");
+console.log(listener.varTableInstance.getVariables());
+
+console.log("\n== Dir de Funciones ==");
+console.log(listener.funcDir.getVariables());
