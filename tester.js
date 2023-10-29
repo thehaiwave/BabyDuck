@@ -36,4 +36,7 @@ const tester = () => {
   return statusObject;
 };
 
+const testingResult = tester();
+console.log(testingResult);
+
 export default tester;

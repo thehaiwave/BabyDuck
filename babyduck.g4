@@ -1,37 +1,37 @@
 grammar babyduck;
 
-Program: 'program';
-Main: 'main';
-End: 'end';
-Var: 'var';
-Void: 'void';
-Print: 'print';
-While : 'while';
-Do: 'do';
-If: 'if';
-Else: 'else';
-Int: 'int';
-Float: 'float';
-Identifier: [a-zA-Z][a-zA-Z0-9]*;
+Program         : 'program';
+Main            : 'main';
+End             : 'end';
+Var             : 'var';
+Void            : 'void';
+Print           : 'print';
+While           : 'while';
+Do              : 'do';
+If              : 'if';
+Else            : 'else';
+Int             : 'int';
+Float           : 'float';
+Identifier      : [a-zA-Z][a-zA-Z0-9]*;
 
-Plus: '+';
-Minus: '-';
-Star: '*';
-Div: '/';
-Assign: '=';
-NotEqual: '!=';
-Greater: '>';
-Less: '<';
+Plus            : '+';
+Minus           : '-';
+Star            : '*';
+Div             : '/';
+Assign          : '=';
+NotEqual        : '!=';
+Greater         : '>';
+Less            : '<';
 
-LeftParen: '(';
-RightParen: ')';
-LeftBracket: '[';
-RightBracket: ']';
-LeftBrace: '{';
-RightBrace: '}';
-Comma: ',';
-Colon: ':';
-Semi: ';';
+LeftParen       : '(';
+RightParen      : ')';
+LeftBracket     : '[';
+RightBracket    : ']';
+LeftBrace       : '{';
+RightBrace      : '}';
+Comma           : ',';
+Colon           : ':';
+Semi            : ';';
 
 CteString: '"' (~["] | '\\"')* '"';
 CteInt: [0-9]+;
@@ -39,17 +39,20 @@ CteFloat: [0-9]+ '.' [0-9]+;
 
 programa: Program Identifier Semi vars? funcs* Main body End;
 
+// vars: Var ((Identifier | Identifier Comma)+ Colon type Semi)+;
+
 vars: Var (commaSeparatedId Colon type Semi)+;
 
 commaSeparatedId: 
     Identifier 
-    | Identifier Comma commaSeparatedId;
+    | (Identifier Comma)+ Identifier;
+
 
 funcs: Void Identifier LeftParen idTypeSequence? RightParen LeftBracket vars? body RightBracket Semi;
 
 idTypeSequence: 
     Identifier Colon type
-    | Identifier Colon type Comma idTypeSequence;
+    | (Identifier Colon type Comma)+ Identifier Colon type;
 
 body: LeftBrace statement* RightBrace;
 

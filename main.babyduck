@@ -1,0 +1,27 @@
+program Patito;
+    void fooFuncCall(argFoo: int, argBaz: float, argQux: int)[
+        var 
+            funcBaz, funcQux, funcQuux: int;
+            funcPlease: float;
+            funcWork: float;
+            
+        {}];
+    void bazFuncCall()[{}];
+
+    main {
+        foo = 13;
+        bar = 103;
+
+        if(foo < 30) {
+            print("Hello, world! This is a test \"string\" with special characters: @#^&*()-_=+[]{};:'<>,.?/~\\ and spaces.");
+        }else{
+            fooFuncCall(foo);
+        };
+
+        while{
+            bar = bar - 1;
+            print("Bar = ", bar);
+
+        }do(foo < bar);
+    }
+end

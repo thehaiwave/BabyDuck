@@ -2,5 +2,20 @@
   "dependencies": {
     "antlr4": "^4.13.1"
   },
-  "type": "module"
+  "type": "module",
+  "name": "babyduck-brito",
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "compile": "node main.js",
+    "test": "node tester.js",
+    "antlr": "antlr4 -Dlanguage=JavaScript babyduck.g4 -o parser/"
+  },
+  "author": "",
+  "license": "ISC"
 }
