@@ -1,0 +1,3 @@
+program Patito;
+    main {}
+end

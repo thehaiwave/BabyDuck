@@ -1,0 +1,16 @@
+program Patito;
+    void foo(argFoo: int, argBar: int)[
+        var 
+            funcBaz: int; 
+            funcQux, funcQuux: float;
+            funcCorge: int;
+        {
+            innerFoo = -1.2;
+            innerBar = +14738.19;
+            innerBaz = 83817473;
+            innerQux = (argFoo + argBar) - funcCorge / 192.291;
+            innerQuux = 30 / 2.5 + -argFoo > (250 != 100) * -argBar - 900;
+        }];
+
+    main {}
+end

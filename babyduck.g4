@@ -1,63 +1,104 @@
 grammar babyduck;
 
-///////////////////////////// WHITESPACE /////////////////////////////
-WhiteSpace : [ \t\r\n]+ -> skip;
+Program: 'program';
+Main: 'main';
+End: 'end';
+Var: 'var';
+Void: 'void';
+Print: 'print';
+While : 'while';
+Do: 'do';
+If: 'if';
+Else: 'else';
+Int: 'int';
+Float: 'float';
+Identifier: [a-zA-Z][a-zA-Z0-9]*;
 
-///////////////////////////// TOKENS /////////////////////////////
-INTEGER: [0-9]+;
+Plus: '+';
+Minus: '-';
+Star: '*';
+Div: '/';
+Assign: '=';
+NotEqual: '!=';
+Greater: '>';
+Less: '<';
 
-FLOAT_NUM: [0-9]+ '.' [0-9]+;
+LeftParen: '(';
+RightParen: ')';
+LeftBracket: '[';
+RightBracket: ']';
+LeftBrace: '{';
+RightBrace: '}';
+Comma: ',';
+Colon: ':';
+Semi: ';';
 
-ID: [a-zA-Z] ([a-zA-Z] | [0-9])*;
+CteString: '"' (~["] | '\\"')* '"';
+CteInt: [0-9]+;
+CteFloat: [0-9]+ '.' [0-9]+;
 
-STRING: '"' .*? '"';
+programa: Program Identifier Semi vars? funcs* Main body End;
 
-///////////////////////////// OPERATORS /////////////////////////////
-PLUS: '+';
+vars: Var (commaSeparatedId Colon type Semi)+;
 
-MINUS: '-';
+commaSeparatedId: 
+    Identifier 
+    | Identifier Comma commaSeparatedId;
 
-MULTIPLY: '*';
+funcs: Void Identifier LeftParen idTypeSequence? RightParen LeftBracket vars? body RightBracket Semi;
 
-DIVIDE: '/';
+idTypeSequence: 
+    Identifier Colon type
+    | Identifier Colon type Comma idTypeSequence;
 
-EQUALS: '=';
+body: LeftBrace statement* RightBrace;
 
-NOTEQUALS: '!=';
+type: 
+    Int
+    | Float;
 
-GREATERTHAN: '>';
+statement: 
+    assign
+    | condition
+    | cycle
+    | f_call
+    | print;
 
-LESSTHAN: '<';
+assign: Identifier Assign expression Semi;
 
-///////////////////////////// GRAMMAR /////////////////////////////
-program: 'program' ID ';' (vars)? (funcs)* 'main' body 'end';
+condition: If LeftParen expression RightParen body (Else body)? Semi;
 
-vars: 'var' (ID (',' ID)* ':' type ';')+;
+cycle: While body Do LeftParen expression RightParen Semi;
 
-type: 'int' | 'float';
+f_call: Identifier LeftParen commaSeparatedExpression? RightParen Semi;
 
-funcs: 'void' ID '(' (ID ':' type (',' ID ':' type)*)? ')' '[' (vars)? body ']' ';';
+commaSeparatedExpression: 
+    expression
+    | expression Comma commaSeparatedExpression ;
 
-body: '{' (statement)* '}';
+print: Print LeftParen printSequence RightParen Semi;
 
-statement: assign | condition | cycle | f_call | print;
+printSequence: (expression | CteString) (Comma printSequence)?;
 
-assign: ID EQUALS expression ';';
+expression: exp ((Greater | Less | NotEqual) exp)?;
 
-expression: exp ((GREATERTHAN | LESSTHAN | NOTEQUALS) exp)?;
+exp: 
+    termino 
+    | termino (Plus | Minus) exp;
 
-condition: 'if' '(' expression ')' body ('else' body)? ';';
+termino: 
+    factor
+    | factor (Star | Div) termino;
 
-exp: termino ((PLUS | MINUS) termino)*;
+factor: 
+    LeftParen expression RightParen
+    | factorSequence;
 
-termino: factor ((MULTIPLY | DIVIDE) factor)?;
+factorSequence: (Plus | Minus)? (Identifier | cte);
 
-factor: ('(' expression ')') | ((MINUS | PLUS)? (ID | cte));
+cte: 
+    CteInt
+    | CteFloat;
 
-cte: INTEGER | FLOAT_NUM;
-
-cycle: 'while' body 'do' '(' expression ')' ';';
-
-f_call: ID '(' (expression (',' expression)* )? ')' ';';
-
-print: 'print' '(' (expression | STRING) (',' (expression|STRING))* ')' ';';
+Whitespace: [ \t]+ -> skip;
+Newline: ('\r' '\n'? | '\n') -> skip;

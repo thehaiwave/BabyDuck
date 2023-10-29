@@ -1,0 +1,9 @@
+program Patito;
+    void fooBar(foo: int)[{}];
+    void foobar(foo: int, bar: float, baz: float)[{}];
+    void foobar1(foo: int, bar: int, baz: int, qux: int)[{}];
+    void FOOBAR2(foo: int, bar: int, baz: int, qux: int, quux: float)[{}];
+
+
+    main {}
+end
