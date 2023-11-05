@@ -11,8 +11,6 @@ class QuadrupleGenerator {
     const quadruplesQ = [];
     const operatorStack = new Stack();
     const operandStack = new Stack();
-    const typeStack = new Stack();
-    let tempIndex = 0;
 
     function* genTempId() {
       let index = 0;
@@ -31,6 +29,16 @@ class QuadrupleGenerator {
 
       operandStack.push({ type: "Identifier", name: tempVar });
       quadruplesQ.push([op, first, second, tempVar]);
+    }
+
+    function evalLeft() {
+      while (
+        !operatorStack.isEmpty() &&
+        operatorStack.top().name !== "=" &&
+        operatorStack.top().name !== "("
+      ) {
+        addQuadruple(operandStack, operatorStack);
+      }
     }
 
     console.log(
@@ -60,8 +68,6 @@ class QuadrupleGenerator {
         operatorStack.push(token);
       } else if (type === ")") {
         while (!operatorStack.isEmpty() && operatorStack.top().name !== "(") {
-          console.log("OPERAND STACK=", operandStack.print("name"));
-          console.log("OPERATOR STACK=", operatorStack.print("name"));
           addQuadruple(operandStack, operatorStack);
         }
 
@@ -72,15 +78,13 @@ class QuadrupleGenerator {
         ) {
           addQuadruple(operandStack, operatorStack);
         }
+      } else if (type === "<" || type === ">" || type === "!=") {
+        evalLeft();
+        operatorStack.push(token);
       }
-
-      console.log("OPERAND STACK=", operandStack.print("name"));
-      console.log("OPERATOR STACK=", operatorStack.print("name"));
     }
 
     while (!operatorStack.isEmpty() && operatorStack.top().name !== "=") {
-      console.log("OPERAND STACK=", operandStack.print("name"));
-      console.log("OPERATOR STACK=", operatorStack.print("name"));
       addQuadruple(operandStack, operatorStack);
     }
 
@@ -91,7 +95,7 @@ class QuadrupleGenerator {
     operandStack.push({ type: "Identifier", name: tempVar });
     quadruplesQ.push(["=", first, second]);
 
-    console.log(quadruplesQ);
+    console.log("THE QUADRUPLE = ", quadruplesQ);
 
     console.log(
       "\n============================================================================="
