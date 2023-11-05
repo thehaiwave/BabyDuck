@@ -39,8 +39,6 @@ CteFloat: [0-9]+ '.' [0-9]+;
 
 programa: Program Identifier Semi vars? funcs* Main body End;
 
-// vars: Var ((Identifier | Identifier Comma)+ Colon type Semi)+;
-
 vars: Var (commaSeparatedId Colon type Semi)+;
 
 commaSeparatedId: 

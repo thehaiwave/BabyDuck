@@ -12,8 +12,14 @@ program Patito;
         foo = 13;
         bar = 103;
 
+        innerBaz = 83817473;
+        foo = (bar + baz) - qux / 192.291;
+        innerQuux = 30 / 2.5 + argFoo * (100 /2 + 3 * 10) * argBar-900 ;
+        something = a*b;
+        lmao = c- (a*b + 2 - a/b) + 1 - 10 - foo - bar * 10/2;
+
         if(foo < 30) {
-            print("Hello, world! This is a test \"string\" with special characters: @#^&*()-_=+[]{};:'<>,.?/~\\ and spaces.");
+            print("Hello, world! This is a test \"string\" with special characters: @#^&*()-_=+[]{};:'<>,.?/~\\ and spaces.", 2+2);
         }else{
             fooFuncCall(foo);
         };

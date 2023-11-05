@@ -5,17 +5,25 @@ class FuncDir {
 
   insertFunc(name, args, context) {
     if (this.funcs?.[name] !== undefined) {
-      throw new Error(`Function name has already been declared.`);
+      throw new Error("Function name has already been declared.");
     }
 
     this.funcs[name] = { args: args, context: context };
   }
 
   deleteFunc(name) {
-    if (this.variables.has(name)) {
-      delete this.variables[name];
+    if (this.funcs.has(name)) {
+      delete this.funcs[name];
     } else {
-      throw new Error(`Function name not found.`);
+      throw new Error("Function name not found.");
+    }
+  }
+
+  getFunc(name) {
+    if (this.funcs.has(name)) {
+      return this.funcs[name];
+    } else {
+      throw new Error("Function has not been declared");
     }
   }
 
