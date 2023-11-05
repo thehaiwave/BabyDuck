@@ -5,7 +5,12 @@ program Patito;
             funcPlease: float;
             funcWork: float;
             
-        {}];
+        {
+            innerFoo = 1.2;
+            innerBar = 14738.19;
+            innerBaz = 83817473;
+            innerQux = (argFoo + argBar) - funcCorge / 192.291;
+        }];
     void bazFuncCall()[{}];
 
     main {
@@ -14,12 +19,12 @@ program Patito;
 
         innerBaz = 83817473;
         foo = (bar + baz) - qux / 192.291;
-        innerQuux = 30 / 2.5 + argFoo * (100 /2 + 3 * 10) * argBar-900 ;
+        lmao = c- (a*b + 2 - a/b) - (10 != 2) -2.2;
+        innerQuux = 30 / 2.5 + argFoo * (100 /2 + 3 * 10) * argBar -900 ;
         something = a*b + 10 > 10 + 2/1 + 100 * (10 /2 - 10);
-        lmao = c- (a*b + 2 - a/b) - (10 != 2);
 
         if(foo < 30) {
-            print("Hello, world! This is a test \"string\" with special characters: @#^&*()-_=+[]{};:'<>,.?/~\\ and spaces.", 2+2);
+            print("Hello, world! This is a test \"string\" with special characters: @#^&*()-_=+[]{};:'<>,.?/~\\ and spaces.", 2+2/2, "lol", "testing comma,,,,", 2 +   3);
         }else{
             fooFuncCall(foo);
         };

@@ -63,6 +63,9 @@ class TreeWalker extends babyduckListener {
   }
 
   exitAssign(ctx) {
+    if (!ctx) {
+      return;
+    }
     const matchStart = ctx.start.tokenIndex;
     const matchEnd = ctx.stop.tokenIndex;
 
@@ -73,6 +76,69 @@ class TreeWalker extends babyduckListener {
     );
 
     this.QuadrupleGenerator.generateQuadruple(cleanArray, "assign");
+  }
+
+  exitPrint(ctx) {
+    if (!ctx) {
+      return;
+    }
+
+    function splitByComma(arr) {
+      let result = [];
+      let currentSubArray = [];
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].type === "CteString" || arr[i].type === "Identifier") {
+          result.push(arr[i]);
+        } else if (arr[i].name === "," && arr[i].type === ",") {
+          if (currentSubArray.length > 0) {
+            result.push(currentSubArray);
+            currentSubArray = [];
+          }
+        } else {
+          currentSubArray.push(arr[i]);
+        }
+      }
+      if (currentSubArray.length > 0) {
+        result.push(currentSubArray);
+      }
+      return result;
+    }
+
+    const matchStart = ctx.start.tokenIndex;
+    const matchEnd = ctx.stop.tokenIndex;
+
+    let cleanArray = this.SemanticChecker.transformAntlrToArray(
+      this.tokenObjects,
+      matchStart,
+      matchEnd
+    );
+
+    cleanArray.pop();
+    cleanArray = cleanArray.slice(2);
+    let lmao = splitByComma(cleanArray);
+
+    this.QuadrupleGenerator.generateQuadruple(lmao, "print");
+
+    console.log(lmao);
+  }
+
+  exitCondition(ctx) {
+    const matchStart = ctx.start.tokenIndex;
+    const matchEnd = ctx.stop.tokenIndex;
+
+    let cleanArray = this.SemanticChecker.transformAntlrToArray(
+      this.tokenObjects,
+      matchStart,
+      matchEnd
+    );
+
+    const withElse = cleanArray.some((el) => el.type === "else");
+
+    if (withElse) {
+      this.QuadrupleGenerator.generateQuadruple(ctx.children, "ifElse");
+    } else {
+      this.QuadrupleGenerator.generateQuadruple(ctx.children, "if");
+    }
   }
 }
 
