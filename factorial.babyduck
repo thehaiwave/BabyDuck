@@ -1,0 +1,15 @@
+program FactorialCalculator;
+    var number, result: int;
+
+    main {
+        number = 5; 
+        result = 1;
+
+        while {
+            result = result * number;
+            number = number - 1;
+        } do(number > 1);
+
+        print("Factorial = ", result);
+    }
+end

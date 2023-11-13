@@ -50,21 +50,34 @@ class Porfavor extends babyduckListener {
 
       this.QuadrupleGenerator.bringGoto();
     }
-
     if (this.contextStack.top() === "IF") {
       console.log("WE IN IF LOL");
-
-      this.contextStack.pop();
-    } else if (this.contextStack.top() === "ELSE") {
-      console.log("WE IN ELSE LOL");
-      // this.QuadrupleGenerator.setGoto([["GOTO", null, null]]);
-      this.QuadrupleGenerator.bringGoto();
+      console.log(this.contextStack);
+      this.QuadrupleGenerator.setGoto([["GOTO", null, null]]);
 
       this.contextStack.pop();
     }
   }
 
-  exitBody(ctx) {}
+  exitBody(ctx) {
+    // if (this.contextStack.top() === "IF") {
+    //   console.log("WE IN IF LOL");
+    //   console.log(this.contextStack);
+    //   // this.QuadrupleGenerator.setGoto([["GOTO", "what", null]]);
+
+    //   this.contextStack.pop();
+    // } else
+    if (this.contextStack.top() === "ELSE") {
+      console.log("WE IN ELSE LOL");
+      this.QuadrupleGenerator.bringGoto();
+
+      // this.QuadrupleGenerator.setGoto([["GOTO", null, null]]);
+      // this.QuadrupleGenerator.bringGoto();
+
+      this.contextStack.pop();
+    } else if (this.contextStack.top() === "CYCLE") {
+    }
+  }
 
   enterVars(ctx) {
     console.log("Vars");
@@ -101,6 +114,15 @@ class Porfavor extends babyduckListener {
       this.QuadrupleGenerator.setGoto([["GOTOF", res, null]]);
       this.currentContext = "IF";
     }
+
+    // if (this.contextStack.top() === "CYCLE") {
+    //   console.log("we in  a cycle lmao");
+    //   this.QuadrupleGenerator.insertQuadruple([["ENDCYCLE"]]);
+
+    //   let res = this.QuadrupleGenerator.genExpressionQuadruple(cleanArray);
+
+    //   // this.QuadrupleGenerator.genConditionalJumpBack(res);
+    // }
   }
 
   exitAssign(ctx) {
@@ -226,9 +248,31 @@ class Porfavor extends babyduckListener {
   //   console.log("XDDD", convert(cleanArray));
   // }
 
+  enterCycle(ctx) {
+    this.contextStack.push("CYCLE");
+    this.QuadrupleGenerator.cycleJump();
+
+    console.log("DAEXPRESSION=", ctx.expression().getText());
+  }
+
+  exitCycle(ctx) {
+    const matchStart = ctx.expression().start.tokenIndex;
+    const matchEnd = ctx.expression().stop.tokenIndex;
+    const cleanArray = this.SemanticChecker.transformAntlrToArray(
+      this.tokenObjects,
+      matchStart,
+      matchEnd
+    );
+
+    let res = this.QuadrupleGenerator.genExpressionQuadruple(cleanArray);
+
+    // Conditional jump back to the start of the loop
+    this.QuadrupleGenerator.genConditionalJumpBack(res);
+    this.contextStack.pop();
+  }
+
   enterCondition(ctx) {
     console.log("Conditionlol");
-    this.contextStack.push("CONDITION");
 
     const matchStart = ctx.start.tokenIndex;
     const matchEnd = ctx.stop.tokenIndex;
@@ -241,17 +285,21 @@ class Porfavor extends babyduckListener {
 
     this.currentContext = "CONDITION";
     this.startingElse = cleanArray.some((el) => el.type === "else");
-    this.contextStack.push("IF");
-    if (this.startingElse) this.contextStack.push("ELSE");
+
+    this.contextStack.push("CONDITION");
+    if (this.startingElse) {
+      this.contextStack.push("IF");
+      this.contextStack.push("ELSE");
+    }
   }
 
   exitCondition(ctx) {
     console.log("Condition");
     this.currentContext = null;
 
-    // this.QuadrupleGenerator.bringGoto();
-    console.log(this.contextStack);
+    this.QuadrupleGenerator.bringGoto();
     this.contextStack.pop();
+    console.log("againhere=", this.contextStack);
   }
 }
 

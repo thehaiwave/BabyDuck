@@ -7,6 +7,7 @@ class QuadrupleGenerator {
     this.globalQuadruples = [];
     this.jumpStack = new Stack();
     this.currentTemp = 0;
+    this.loopStartIndex = 0;
   }
 
   genProgramaStart() {}
@@ -270,6 +271,14 @@ class QuadrupleGenerator {
   bringGoto() {
     const gotoLine = this.jumpStack.pop();
     this.globalQuadruples[gotoLine][2] = this.globalQuadruples.length;
+  }
+
+  cycleJump() {
+    this.loopStartIndex = this.globalQuadruples.length;
+  }
+
+  genConditionalJumpBack(conditionVar) {
+    this.globalQuadruples.push(["GOTOV", conditionVar, this.loopStartIndex]);
   }
 }
 

@@ -34,6 +34,8 @@ program Patito;
             lmao = 10;
             lmao = 10;
             lmao = 10;
+            shit = omg > 30;
+            
         }else{
             someCall(foo, 500+30);
             shit = omg > 30;
@@ -48,9 +50,17 @@ program Patito;
         };
 
         while{
+            qux = 1 / 2 * 2;
+            if(baz < 30) {
+                someFunc(lmao);
+            };
             bar = bar - 1;
             print("Bar = ", bar);
 
+
+
         }do(foo < bar);
+
+        someFoo(lmao);
     }
 end
