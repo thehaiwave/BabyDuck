@@ -255,7 +255,7 @@ class QuadrupleGenerator {
 
   printQuadruples() {
     const damn = this.globalQuadruples.map((element, i) =>
-      console.log(i, element)
+      console.log(element)
     );
   }
 
@@ -268,9 +268,9 @@ class QuadrupleGenerator {
     this.jumpStack.push(this.globalQuadruples.length - 1);
   }
 
-  bringGoto() {
+  bringGoto(offset = 0) {
     const gotoLine = this.jumpStack.pop();
-    this.globalQuadruples[gotoLine][2] = this.globalQuadruples.length;
+    this.globalQuadruples[gotoLine][2] = this.globalQuadruples.length + offset;
   }
 
   cycleJump() {

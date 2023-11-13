@@ -8,9 +8,7 @@ class Porfavor extends babyduckListener {
     super();
     this.jumpStack = new Stack();
     this.tokenObjects = tokenObjects;
-
     this.contextStack = new Stack();
-
     this.QuadrupleGenerator = new QuadrupleGenerator();
     this.SemanticChecker = new SemanticChecker();
     this.currentContext = null;
@@ -30,7 +28,8 @@ class Porfavor extends babyduckListener {
   }
 
   exitPrograma(ctx) {
-    console.log("Programa");
+    console.log("Programxda");
+    this.QuadrupleGenerator.insertQuadruple([["ENDPROG"]]);
     this.QuadrupleGenerator.printQuadruples();
     console.log("dacontext", this.contextStack);
   }
@@ -69,7 +68,7 @@ class Porfavor extends babyduckListener {
     // } else
     if (this.contextStack.top() === "ELSE") {
       console.log("WE IN ELSE LOL");
-      this.QuadrupleGenerator.bringGoto();
+      this.QuadrupleGenerator.bringGoto(1);
 
       // this.QuadrupleGenerator.setGoto([["GOTO", null, null]]);
       // this.QuadrupleGenerator.bringGoto();
@@ -208,45 +207,6 @@ class Porfavor extends babyduckListener {
       }
     }
   }
-
-  // enterPrint(ctx) {
-  //   console.log("Print");
-  //   const matchStart = ctx.start.tokenIndex;
-  //   const matchEnd = ctx.stop.tokenIndex;
-
-  //   const cleanArray = this.SemanticChecker.transformAntlrToArray(
-  //     this.tokenObjects,
-  //     matchStart,
-  //     matchEnd
-  //   );
-
-  //   console.log("CLEAN=", cleanArray);
-  //   function convert(array) {
-  //     let result = [];
-  //     let currentExpr = [];
-
-  //     for (const token of array) {
-  //       if (token.type === "CteString") {
-  //         result.push(token);
-  //       } else if (token.type === ",") {
-  //         if (currentExpr.length > 0) {
-  //           result.push(currentExpr);
-  //           currentExpr = [];
-  //         }
-  //       } else {
-  //         currentExpr.push(token);
-  //       }
-  //     }
-
-  //     if (currentExpr.length > 0) {
-  //       result.push(currentExpr);
-  //     }
-
-  //     return result;
-  //   }
-
-  //   console.log("XDDD", convert(cleanArray));
-  // }
 
   enterCycle(ctx) {
     this.contextStack.push("CYCLE");

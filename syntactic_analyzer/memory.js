@@ -1,9 +1,9 @@
 class Memory {
   constructor() {
-    this.intMemory = [];
-    this.floatMemory = [];
-    this.temporalMemory = [];
-    this.funcMemory = [];
+    this.intMemory = {};
+    this.floatMemory = {};
+    this.temporalMemory = {};
+    this.funcMemory = {};
     this.intCounter = 0;
     this.intUpper = 999;
     this.floatCounter = 100;
@@ -14,7 +14,7 @@ class Memory {
     this.funcUpper = 3999;
   }
 
-  addVariable(type, value) {
+  allocateVariable(type, value) {
     if (type == "int") {
       this.intMemory.push(value);
       this.intCounter++;
@@ -27,7 +27,7 @@ class Memory {
     }
   }
 
-  addFunction(type, value) {
+  allocateFunction(type, value) {
     if (type == "func") {
       this.funcMemory.push(value);
       this.funcCounter++;
