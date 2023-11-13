@@ -1,4 +1,5 @@
 program Patito;
+    var what: int;
     void fooFuncCall(argFoo: int, argBaz: float, argQux: int)[
         var 
             funcBaz, funcQux, funcQuux: int;
@@ -10,8 +11,13 @@ program Patito;
             innerBar = 14738.19;
             innerBaz = 83817473;
             innerQux = (argFoo + argBar) - funcCorge / 192.291;
+            innerQux = (argFoo + argBar) - funcCorge / 192.291;
+
+            
         }];
-    void bazFuncCall()[{}];
+    void bazFuncCall()[{
+        thehell = 10;
+    }];
 
     main {
         foo = 13;
@@ -21,12 +27,24 @@ program Patito;
         foo = (bar + baz) - qux / 192.291;
         lmao = c- (a*b + 2 - a/b) - (10 != 2) -2.2;
         innerQuux = 30 / 2.5 + argFoo * (100 /2 + 3 * 10) * argBar -900 ;
-        something = a*b + 10 > 10 + 2/1 + 100 * (10 /2 - 10);
+        something = foo > 30;
 
         if(foo < 30) {
-            print("Hello, world! This is a test \"string\" with special characters: @#^&*()-_=+[]{};:'<>,.?/~\\ and spaces.", 2+2/2, "lol", "testing comma,,,,", 2 +   3);
+            lmao = 10;
+            lmao = 10;
+            lmao = 10;
+            lmao = 10;
         }else{
-            fooFuncCall(foo);
+            someCall(foo, 500+30);
+            shit = omg > 30;
+            print("Bar = ", 100+2);
+        };
+
+        if(2 + 20/3 < 30 - (10 + 2)){
+            shit = omg > 30;
+            lmao = c- (a*b + 2 - a/b) - (10 != 2) -2.2;
+
+            someCall(foo);
         };
 
         while{

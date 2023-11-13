@@ -2,72 +2,73 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import babyduckListener from './babyduckListener.js';
-const serializedATN = [4,1,35,218,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,35,221,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
-20,7,20,1,0,1,0,1,0,1,0,3,0,47,8,0,1,0,5,0,50,8,0,10,0,12,0,53,9,0,1,0,1,
-0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,4,1,65,8,1,11,1,12,1,66,1,2,1,2,1,2,4,
-2,72,8,2,11,2,12,2,73,1,2,3,2,77,8,2,1,3,1,3,1,3,1,3,3,3,83,8,3,1,3,1,3,
-1,3,3,3,88,8,3,1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,4,4,102,8,
-4,11,4,12,4,103,1,4,1,4,1,4,1,4,3,4,110,8,4,1,5,1,5,5,5,114,8,5,10,5,12,
-5,117,9,5,1,5,1,5,1,6,1,6,1,7,1,7,1,7,1,7,1,7,3,7,128,8,7,1,8,1,8,1,8,1,
-8,1,8,1,9,1,9,1,9,1,9,1,9,1,9,1,9,3,9,142,8,9,1,9,1,9,1,10,1,10,1,10,1,10,
-1,10,1,10,1,10,1,10,1,11,1,11,1,11,3,11,157,8,11,1,11,1,11,1,11,1,12,1,12,
-1,12,1,12,1,12,3,12,167,8,12,1,13,1,13,1,13,1,13,1,13,1,13,1,14,1,14,3,14,
-177,8,14,1,14,1,14,3,14,181,8,14,1,15,1,15,1,15,3,15,186,8,15,1,16,1,16,
-1,16,1,16,1,16,3,16,193,8,16,1,17,1,17,1,17,1,17,1,17,3,17,200,8,17,1,18,
-1,18,1,18,1,18,1,18,3,18,207,8,18,1,19,3,19,210,8,19,1,19,1,19,3,19,214,
-8,19,1,20,1,20,1,20,0,0,21,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,
-34,36,38,40,0,5,1,0,11,12,1,0,19,21,1,0,14,15,1,0,16,17,1,0,32,33,221,0,
-42,1,0,0,0,2,58,1,0,0,0,4,76,1,0,0,0,6,78,1,0,0,0,8,109,1,0,0,0,10,111,1,
-0,0,0,12,120,1,0,0,0,14,127,1,0,0,0,16,129,1,0,0,0,18,134,1,0,0,0,20,145,
-1,0,0,0,22,153,1,0,0,0,24,166,1,0,0,0,26,168,1,0,0,0,28,176,1,0,0,0,30,182,
-1,0,0,0,32,192,1,0,0,0,34,199,1,0,0,0,36,206,1,0,0,0,38,209,1,0,0,0,40,215,
-1,0,0,0,42,43,5,1,0,0,43,44,5,13,0,0,44,46,5,30,0,0,45,47,3,2,1,0,46,45,
-1,0,0,0,46,47,1,0,0,0,47,51,1,0,0,0,48,50,3,6,3,0,49,48,1,0,0,0,50,53,1,
-0,0,0,51,49,1,0,0,0,51,52,1,0,0,0,52,54,1,0,0,0,53,51,1,0,0,0,54,55,5,2,
-0,0,55,56,3,10,5,0,56,57,5,3,0,0,57,1,1,0,0,0,58,64,5,4,0,0,59,60,3,4,2,
-0,60,61,5,29,0,0,61,62,3,12,6,0,62,63,5,30,0,0,63,65,1,0,0,0,64,59,1,0,0,
-0,65,66,1,0,0,0,66,64,1,0,0,0,66,67,1,0,0,0,67,3,1,0,0,0,68,77,5,13,0,0,
-69,70,5,13,0,0,70,72,5,28,0,0,71,69,1,0,0,0,72,73,1,0,0,0,73,71,1,0,0,0,
-73,74,1,0,0,0,74,75,1,0,0,0,75,77,5,13,0,0,76,68,1,0,0,0,76,71,1,0,0,0,77,
-5,1,0,0,0,78,79,5,5,0,0,79,80,5,13,0,0,80,82,5,22,0,0,81,83,3,8,4,0,82,81,
-1,0,0,0,82,83,1,0,0,0,83,84,1,0,0,0,84,85,5,23,0,0,85,87,5,24,0,0,86,88,
-3,2,1,0,87,86,1,0,0,0,87,88,1,0,0,0,88,89,1,0,0,0,89,90,3,10,5,0,90,91,5,
-25,0,0,91,92,5,30,0,0,92,7,1,0,0,0,93,94,5,13,0,0,94,95,5,29,0,0,95,110,
-3,12,6,0,96,97,5,13,0,0,97,98,5,29,0,0,98,99,3,12,6,0,99,100,5,28,0,0,100,
-102,1,0,0,0,101,96,1,0,0,0,102,103,1,0,0,0,103,101,1,0,0,0,103,104,1,0,0,
-0,104,105,1,0,0,0,105,106,5,13,0,0,106,107,5,29,0,0,107,108,3,12,6,0,108,
-110,1,0,0,0,109,93,1,0,0,0,109,101,1,0,0,0,110,9,1,0,0,0,111,115,5,26,0,
-0,112,114,3,14,7,0,113,112,1,0,0,0,114,117,1,0,0,0,115,113,1,0,0,0,115,116,
-1,0,0,0,116,118,1,0,0,0,117,115,1,0,0,0,118,119,5,27,0,0,119,11,1,0,0,0,
-120,121,7,0,0,0,121,13,1,0,0,0,122,128,3,16,8,0,123,128,3,18,9,0,124,128,
-3,20,10,0,125,128,3,22,11,0,126,128,3,26,13,0,127,122,1,0,0,0,127,123,1,
-0,0,0,127,124,1,0,0,0,127,125,1,0,0,0,127,126,1,0,0,0,128,15,1,0,0,0,129,
-130,5,13,0,0,130,131,5,18,0,0,131,132,3,30,15,0,132,133,5,30,0,0,133,17,
-1,0,0,0,134,135,5,9,0,0,135,136,5,22,0,0,136,137,3,30,15,0,137,138,5,23,
-0,0,138,141,3,10,5,0,139,140,5,10,0,0,140,142,3,10,5,0,141,139,1,0,0,0,141,
-142,1,0,0,0,142,143,1,0,0,0,143,144,5,30,0,0,144,19,1,0,0,0,145,146,5,7,
-0,0,146,147,3,10,5,0,147,148,5,8,0,0,148,149,5,22,0,0,149,150,3,30,15,0,
-150,151,5,23,0,0,151,152,5,30,0,0,152,21,1,0,0,0,153,154,5,13,0,0,154,156,
-5,22,0,0,155,157,3,24,12,0,156,155,1,0,0,0,156,157,1,0,0,0,157,158,1,0,0,
-0,158,159,5,23,0,0,159,160,5,30,0,0,160,23,1,0,0,0,161,167,3,30,15,0,162,
-163,3,30,15,0,163,164,5,28,0,0,164,165,3,24,12,0,165,167,1,0,0,0,166,161,
-1,0,0,0,166,162,1,0,0,0,167,25,1,0,0,0,168,169,5,6,0,0,169,170,5,22,0,0,
-170,171,3,28,14,0,171,172,5,23,0,0,172,173,5,30,0,0,173,27,1,0,0,0,174,177,
-3,30,15,0,175,177,5,31,0,0,176,174,1,0,0,0,176,175,1,0,0,0,177,180,1,0,0,
-0,178,179,5,28,0,0,179,181,3,28,14,0,180,178,1,0,0,0,180,181,1,0,0,0,181,
-29,1,0,0,0,182,185,3,32,16,0,183,184,7,1,0,0,184,186,3,32,16,0,185,183,1,
-0,0,0,185,186,1,0,0,0,186,31,1,0,0,0,187,193,3,34,17,0,188,189,3,34,17,0,
-189,190,7,2,0,0,190,191,3,32,16,0,191,193,1,0,0,0,192,187,1,0,0,0,192,188,
-1,0,0,0,193,33,1,0,0,0,194,200,3,36,18,0,195,196,3,36,18,0,196,197,7,3,0,
-0,197,198,3,34,17,0,198,200,1,0,0,0,199,194,1,0,0,0,199,195,1,0,0,0,200,
-35,1,0,0,0,201,202,5,22,0,0,202,203,3,30,15,0,203,204,5,23,0,0,204,207,1,
-0,0,0,205,207,3,38,19,0,206,201,1,0,0,0,206,205,1,0,0,0,207,37,1,0,0,0,208,
-210,7,2,0,0,209,208,1,0,0,0,209,210,1,0,0,0,210,213,1,0,0,0,211,214,5,13,
-0,0,212,214,3,40,20,0,213,211,1,0,0,0,213,212,1,0,0,0,214,39,1,0,0,0,215,
-216,7,4,0,0,216,41,1,0,0,0,22,46,51,66,73,76,82,87,103,109,115,127,141,156,
-166,176,180,185,192,199,206,209,213];
+20,7,20,1,0,1,0,1,0,1,0,5,0,47,8,0,10,0,12,0,50,9,0,1,0,5,0,53,8,0,10,0,
+12,0,56,9,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,4,1,68,8,1,11,1,12,1,
+69,1,2,1,2,1,2,4,2,75,8,2,11,2,12,2,76,1,2,3,2,80,8,2,1,3,1,3,1,3,1,3,3,
+3,86,8,3,1,3,1,3,1,3,3,3,91,8,3,1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,1,4,
+1,4,1,4,4,4,105,8,4,11,4,12,4,106,1,4,1,4,1,4,1,4,3,4,113,8,4,1,5,1,5,5,
+5,117,8,5,10,5,12,5,120,9,5,1,5,1,5,1,6,1,6,1,7,1,7,1,7,1,7,1,7,3,7,131,
+8,7,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,9,1,9,1,9,3,9,145,8,9,1,9,1,9,
+1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,11,1,11,1,11,3,11,160,8,11,1,11,
+1,11,1,11,1,12,1,12,1,12,1,12,1,12,3,12,170,8,12,1,13,1,13,1,13,1,13,1,13,
+1,13,1,14,1,14,3,14,180,8,14,1,14,1,14,3,14,184,8,14,1,15,1,15,1,15,3,15,
+189,8,15,1,16,1,16,1,16,1,16,1,16,3,16,196,8,16,1,17,1,17,1,17,1,17,1,17,
+3,17,203,8,17,1,18,1,18,1,18,1,18,1,18,3,18,210,8,18,1,19,3,19,213,8,19,
+1,19,1,19,3,19,217,8,19,1,20,1,20,1,20,0,0,21,0,2,4,6,8,10,12,14,16,18,20,
+22,24,26,28,30,32,34,36,38,40,0,5,1,0,11,12,1,0,19,21,1,0,14,15,1,0,16,17,
+1,0,32,33,224,0,42,1,0,0,0,2,61,1,0,0,0,4,79,1,0,0,0,6,81,1,0,0,0,8,112,
+1,0,0,0,10,114,1,0,0,0,12,123,1,0,0,0,14,130,1,0,0,0,16,132,1,0,0,0,18,137,
+1,0,0,0,20,148,1,0,0,0,22,156,1,0,0,0,24,169,1,0,0,0,26,171,1,0,0,0,28,179,
+1,0,0,0,30,185,1,0,0,0,32,195,1,0,0,0,34,202,1,0,0,0,36,209,1,0,0,0,38,212,
+1,0,0,0,40,218,1,0,0,0,42,43,5,1,0,0,43,44,5,13,0,0,44,48,5,30,0,0,45,47,
+3,2,1,0,46,45,1,0,0,0,47,50,1,0,0,0,48,46,1,0,0,0,48,49,1,0,0,0,49,54,1,
+0,0,0,50,48,1,0,0,0,51,53,3,6,3,0,52,51,1,0,0,0,53,56,1,0,0,0,54,52,1,0,
+0,0,54,55,1,0,0,0,55,57,1,0,0,0,56,54,1,0,0,0,57,58,5,2,0,0,58,59,3,10,5,
+0,59,60,5,3,0,0,60,1,1,0,0,0,61,67,5,4,0,0,62,63,3,4,2,0,63,64,5,29,0,0,
+64,65,3,12,6,0,65,66,5,30,0,0,66,68,1,0,0,0,67,62,1,0,0,0,68,69,1,0,0,0,
+69,67,1,0,0,0,69,70,1,0,0,0,70,3,1,0,0,0,71,80,5,13,0,0,72,73,5,13,0,0,73,
+75,5,28,0,0,74,72,1,0,0,0,75,76,1,0,0,0,76,74,1,0,0,0,76,77,1,0,0,0,77,78,
+1,0,0,0,78,80,5,13,0,0,79,71,1,0,0,0,79,74,1,0,0,0,80,5,1,0,0,0,81,82,5,
+5,0,0,82,83,5,13,0,0,83,85,5,22,0,0,84,86,3,8,4,0,85,84,1,0,0,0,85,86,1,
+0,0,0,86,87,1,0,0,0,87,88,5,23,0,0,88,90,5,24,0,0,89,91,3,2,1,0,90,89,1,
+0,0,0,90,91,1,0,0,0,91,92,1,0,0,0,92,93,3,10,5,0,93,94,5,25,0,0,94,95,5,
+30,0,0,95,7,1,0,0,0,96,97,5,13,0,0,97,98,5,29,0,0,98,113,3,12,6,0,99,100,
+5,13,0,0,100,101,5,29,0,0,101,102,3,12,6,0,102,103,5,28,0,0,103,105,1,0,
+0,0,104,99,1,0,0,0,105,106,1,0,0,0,106,104,1,0,0,0,106,107,1,0,0,0,107,108,
+1,0,0,0,108,109,5,13,0,0,109,110,5,29,0,0,110,111,3,12,6,0,111,113,1,0,0,
+0,112,96,1,0,0,0,112,104,1,0,0,0,113,9,1,0,0,0,114,118,5,26,0,0,115,117,
+3,14,7,0,116,115,1,0,0,0,117,120,1,0,0,0,118,116,1,0,0,0,118,119,1,0,0,0,
+119,121,1,0,0,0,120,118,1,0,0,0,121,122,5,27,0,0,122,11,1,0,0,0,123,124,
+7,0,0,0,124,13,1,0,0,0,125,131,3,16,8,0,126,131,3,18,9,0,127,131,3,20,10,
+0,128,131,3,22,11,0,129,131,3,26,13,0,130,125,1,0,0,0,130,126,1,0,0,0,130,
+127,1,0,0,0,130,128,1,0,0,0,130,129,1,0,0,0,131,15,1,0,0,0,132,133,5,13,
+0,0,133,134,5,18,0,0,134,135,3,30,15,0,135,136,5,30,0,0,136,17,1,0,0,0,137,
+138,5,9,0,0,138,139,5,22,0,0,139,140,3,30,15,0,140,141,5,23,0,0,141,144,
+3,10,5,0,142,143,5,10,0,0,143,145,3,10,5,0,144,142,1,0,0,0,144,145,1,0,0,
+0,145,146,1,0,0,0,146,147,5,30,0,0,147,19,1,0,0,0,148,149,5,7,0,0,149,150,
+3,10,5,0,150,151,5,8,0,0,151,152,5,22,0,0,152,153,3,30,15,0,153,154,5,23,
+0,0,154,155,5,30,0,0,155,21,1,0,0,0,156,157,5,13,0,0,157,159,5,22,0,0,158,
+160,3,24,12,0,159,158,1,0,0,0,159,160,1,0,0,0,160,161,1,0,0,0,161,162,5,
+23,0,0,162,163,5,30,0,0,163,23,1,0,0,0,164,170,3,30,15,0,165,166,3,30,15,
+0,166,167,5,28,0,0,167,168,3,24,12,0,168,170,1,0,0,0,169,164,1,0,0,0,169,
+165,1,0,0,0,170,25,1,0,0,0,171,172,5,6,0,0,172,173,5,22,0,0,173,174,3,28,
+14,0,174,175,5,23,0,0,175,176,5,30,0,0,176,27,1,0,0,0,177,180,3,30,15,0,
+178,180,5,31,0,0,179,177,1,0,0,0,179,178,1,0,0,0,180,183,1,0,0,0,181,182,
+5,28,0,0,182,184,3,28,14,0,183,181,1,0,0,0,183,184,1,0,0,0,184,29,1,0,0,
+0,185,188,3,32,16,0,186,187,7,1,0,0,187,189,3,32,16,0,188,186,1,0,0,0,188,
+189,1,0,0,0,189,31,1,0,0,0,190,196,3,34,17,0,191,192,3,34,17,0,192,193,7,
+2,0,0,193,194,3,32,16,0,194,196,1,0,0,0,195,190,1,0,0,0,195,191,1,0,0,0,
+196,33,1,0,0,0,197,203,3,36,18,0,198,199,3,36,18,0,199,200,7,3,0,0,200,201,
+3,34,17,0,201,203,1,0,0,0,202,197,1,0,0,0,202,198,1,0,0,0,203,35,1,0,0,0,
+204,205,5,22,0,0,205,206,3,30,15,0,206,207,5,23,0,0,207,210,1,0,0,0,208,
+210,3,38,19,0,209,204,1,0,0,0,209,208,1,0,0,0,210,37,1,0,0,0,211,213,7,2,
+0,0,212,211,1,0,0,0,212,213,1,0,0,0,213,216,1,0,0,0,214,217,5,13,0,0,215,
+217,3,40,20,0,216,214,1,0,0,0,216,215,1,0,0,0,217,39,1,0,0,0,218,219,7,4,
+0,0,219,41,1,0,0,0,22,48,54,69,76,79,85,90,106,112,118,130,144,159,169,179,
+183,188,195,202,209,212,216];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -121,29 +122,31 @@ export default class babyduckParser extends antlr4.Parser {
 	        this.match(babyduckParser.Identifier);
 	        this.state = 44;
 	        this.match(babyduckParser.Semi);
-	        this.state = 46;
+	        this.state = 48;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===4) {
+	        while(_la===4) {
 	            this.state = 45;
 	            this.vars();
-	        }
-
-	        this.state = 51;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        while(_la===5) {
-	            this.state = 48;
-	            this.funcs();
-	            this.state = 53;
+	            this.state = 50;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
 	        this.state = 54;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        while(_la===5) {
+	            this.state = 51;
+	            this.funcs();
+	            this.state = 56;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        }
+	        this.state = 57;
 	        this.match(babyduckParser.Main);
-	        this.state = 55;
+	        this.state = 58;
 	        this.body();
-	        this.state = 56;
+	        this.state = 59;
 	        this.match(babyduckParser.End);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -167,21 +170,21 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 58;
+	        this.state = 61;
 	        this.match(babyduckParser.Var);
-	        this.state = 64; 
+	        this.state = 67; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 59;
-	            this.commaSeparatedId();
-	            this.state = 60;
-	            this.match(babyduckParser.Colon);
-	            this.state = 61;
-	            this.type();
 	            this.state = 62;
+	            this.commaSeparatedId();
+	            this.state = 63;
+	            this.match(babyduckParser.Colon);
+	            this.state = 64;
+	            this.type();
+	            this.state = 65;
 	            this.match(babyduckParser.Semi);
-	            this.state = 66; 
+	            this.state = 69; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        } while(_la===13);
@@ -205,37 +208,37 @@ export default class babyduckParser extends antlr4.Parser {
 	    let localctx = new CommaSeparatedIdContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 4, babyduckParser.RULE_commaSeparatedId);
 	    try {
-	        this.state = 76;
+	        this.state = 79;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,4,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 68;
+	            this.state = 71;
 	            this.match(babyduckParser.Identifier);
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 71; 
+	            this.state = 74; 
 	            this._errHandler.sync(this);
 	            var _alt = 1;
 	            do {
 	            	switch (_alt) {
 	            	case 1:
-	            		this.state = 69;
+	            		this.state = 72;
 	            		this.match(babyduckParser.Identifier);
-	            		this.state = 70;
+	            		this.state = 73;
 	            		this.match(babyduckParser.Comma);
 	            		break;
 	            	default:
 	            		throw new antlr4.error.NoViableAltException(this);
 	            	}
-	            	this.state = 73; 
+	            	this.state = 76; 
 	            	this._errHandler.sync(this);
 	            	_alt = this._interp.adaptivePredict(this._input,3, this._ctx);
 	            } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
-	            this.state = 75;
+	            this.state = 78;
 	            this.match(babyduckParser.Identifier);
 	            break;
 
@@ -262,37 +265,37 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 78;
+	        this.state = 81;
 	        this.match(babyduckParser.Void);
-	        this.state = 79;
-	        this.match(babyduckParser.Identifier);
-	        this.state = 80;
-	        this.match(babyduckParser.LeftParen);
 	        this.state = 82;
+	        this.match(babyduckParser.Identifier);
+	        this.state = 83;
+	        this.match(babyduckParser.LeftParen);
+	        this.state = 85;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===13) {
-	            this.state = 81;
+	            this.state = 84;
 	            this.idTypeSequence();
 	        }
 
-	        this.state = 84;
-	        this.match(babyduckParser.RightParen);
-	        this.state = 85;
-	        this.match(babyduckParser.LeftBracket);
 	        this.state = 87;
+	        this.match(babyduckParser.RightParen);
+	        this.state = 88;
+	        this.match(babyduckParser.LeftBracket);
+	        this.state = 90;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===4) {
-	            this.state = 86;
+	            this.state = 89;
 	            this.vars();
 	        }
 
-	        this.state = 89;
+	        this.state = 92;
 	        this.body();
-	        this.state = 90;
+	        this.state = 93;
 	        this.match(babyduckParser.RightBracket);
-	        this.state = 91;
+	        this.state = 94;
 	        this.match(babyduckParser.Semi);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -314,49 +317,49 @@ export default class babyduckParser extends antlr4.Parser {
 	    let localctx = new IdTypeSequenceContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 8, babyduckParser.RULE_idTypeSequence);
 	    try {
-	        this.state = 109;
+	        this.state = 112;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,8,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 93;
+	            this.state = 96;
 	            this.match(babyduckParser.Identifier);
-	            this.state = 94;
+	            this.state = 97;
 	            this.match(babyduckParser.Colon);
-	            this.state = 95;
+	            this.state = 98;
 	            this.type();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 101; 
+	            this.state = 104; 
 	            this._errHandler.sync(this);
 	            var _alt = 1;
 	            do {
 	            	switch (_alt) {
 	            	case 1:
-	            		this.state = 96;
-	            		this.match(babyduckParser.Identifier);
-	            		this.state = 97;
-	            		this.match(babyduckParser.Colon);
-	            		this.state = 98;
-	            		this.type();
 	            		this.state = 99;
+	            		this.match(babyduckParser.Identifier);
+	            		this.state = 100;
+	            		this.match(babyduckParser.Colon);
+	            		this.state = 101;
+	            		this.type();
+	            		this.state = 102;
 	            		this.match(babyduckParser.Comma);
 	            		break;
 	            	default:
 	            		throw new antlr4.error.NoViableAltException(this);
 	            	}
-	            	this.state = 103; 
+	            	this.state = 106; 
 	            	this._errHandler.sync(this);
 	            	_alt = this._interp.adaptivePredict(this._input,7, this._ctx);
 	            } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
-	            this.state = 105;
+	            this.state = 108;
 	            this.match(babyduckParser.Identifier);
-	            this.state = 106;
+	            this.state = 109;
 	            this.match(babyduckParser.Colon);
-	            this.state = 107;
+	            this.state = 110;
 	            this.type();
 	            break;
 
@@ -383,19 +386,19 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 111;
+	        this.state = 114;
 	        this.match(babyduckParser.LeftBrace);
-	        this.state = 115;
+	        this.state = 118;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 8896) !== 0)) {
-	            this.state = 112;
+	            this.state = 115;
 	            this.statement();
-	            this.state = 117;
+	            this.state = 120;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 118;
+	        this.state = 121;
 	        this.match(babyduckParser.RightBrace);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -419,7 +422,7 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 120;
+	        this.state = 123;
 	        _la = this._input.LA(1);
 	        if(!(_la===11 || _la===12)) {
 	        this._errHandler.recoverInline(this);
@@ -448,37 +451,37 @@ export default class babyduckParser extends antlr4.Parser {
 	    let localctx = new StatementContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 14, babyduckParser.RULE_statement);
 	    try {
-	        this.state = 127;
+	        this.state = 130;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 122;
+	            this.state = 125;
 	            this.assign();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 123;
+	            this.state = 126;
 	            this.condition();
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 124;
+	            this.state = 127;
 	            this.cycle();
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 125;
+	            this.state = 128;
 	            this.f_call();
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 126;
+	            this.state = 129;
 	            this.print();
 	            break;
 
@@ -504,13 +507,13 @@ export default class babyduckParser extends antlr4.Parser {
 	    this.enterRule(localctx, 16, babyduckParser.RULE_assign);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 129;
-	        this.match(babyduckParser.Identifier);
-	        this.state = 130;
-	        this.match(babyduckParser.Assign);
-	        this.state = 131;
-	        this.expression();
 	        this.state = 132;
+	        this.match(babyduckParser.Identifier);
+	        this.state = 133;
+	        this.match(babyduckParser.Assign);
+	        this.state = 134;
+	        this.expression();
+	        this.state = 135;
 	        this.match(babyduckParser.Semi);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -534,27 +537,27 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 134;
-	        this.match(babyduckParser.If);
-	        this.state = 135;
-	        this.match(babyduckParser.LeftParen);
-	        this.state = 136;
-	        this.expression();
 	        this.state = 137;
-	        this.match(babyduckParser.RightParen);
+	        this.match(babyduckParser.If);
 	        this.state = 138;
-	        this.body();
+	        this.match(babyduckParser.LeftParen);
+	        this.state = 139;
+	        this.expression();
+	        this.state = 140;
+	        this.match(babyduckParser.RightParen);
 	        this.state = 141;
+	        this.body();
+	        this.state = 144;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===10) {
-	            this.state = 139;
+	            this.state = 142;
 	            this.match(babyduckParser.Else);
-	            this.state = 140;
+	            this.state = 143;
 	            this.body();
 	        }
 
-	        this.state = 143;
+	        this.state = 146;
 	        this.match(babyduckParser.Semi);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -577,19 +580,19 @@ export default class babyduckParser extends antlr4.Parser {
 	    this.enterRule(localctx, 20, babyduckParser.RULE_cycle);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 145;
-	        this.match(babyduckParser.While);
-	        this.state = 146;
-	        this.body();
-	        this.state = 147;
-	        this.match(babyduckParser.Do);
 	        this.state = 148;
-	        this.match(babyduckParser.LeftParen);
+	        this.match(babyduckParser.While);
 	        this.state = 149;
-	        this.expression();
+	        this.body();
 	        this.state = 150;
-	        this.match(babyduckParser.RightParen);
+	        this.match(babyduckParser.Do);
 	        this.state = 151;
+	        this.match(babyduckParser.LeftParen);
+	        this.state = 152;
+	        this.expression();
+	        this.state = 153;
+	        this.match(babyduckParser.RightParen);
+	        this.state = 154;
 	        this.match(babyduckParser.Semi);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -613,21 +616,21 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 153;
-	        this.match(babyduckParser.Identifier);
-	        this.state = 154;
-	        this.match(babyduckParser.LeftParen);
 	        this.state = 156;
+	        this.match(babyduckParser.Identifier);
+	        this.state = 157;
+	        this.match(babyduckParser.LeftParen);
+	        this.state = 159;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(((((_la - 13)) & ~0x1f) === 0 && ((1 << (_la - 13)) & 1573383) !== 0)) {
-	            this.state = 155;
+	            this.state = 158;
 	            this.commaSeparatedExpression();
 	        }
 
-	        this.state = 158;
+	        this.state = 161;
 	        this.match(babyduckParser.RightParen);
-	        this.state = 159;
+	        this.state = 162;
 	        this.match(babyduckParser.Semi);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -649,23 +652,23 @@ export default class babyduckParser extends antlr4.Parser {
 	    let localctx = new CommaSeparatedExpressionContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 24, babyduckParser.RULE_commaSeparatedExpression);
 	    try {
-	        this.state = 166;
+	        this.state = 169;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,13,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 161;
+	            this.state = 164;
 	            this.expression();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 162;
+	            this.state = 165;
 	            this.expression();
-	            this.state = 163;
+	            this.state = 166;
 	            this.match(babyduckParser.Comma);
-	            this.state = 164;
+	            this.state = 167;
 	            this.commaSeparatedExpression();
 	            break;
 
@@ -691,15 +694,15 @@ export default class babyduckParser extends antlr4.Parser {
 	    this.enterRule(localctx, 26, babyduckParser.RULE_print);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 168;
-	        this.match(babyduckParser.Print);
-	        this.state = 169;
-	        this.match(babyduckParser.LeftParen);
-	        this.state = 170;
-	        this.printSequence();
 	        this.state = 171;
-	        this.match(babyduckParser.RightParen);
+	        this.match(babyduckParser.Print);
 	        this.state = 172;
+	        this.match(babyduckParser.LeftParen);
+	        this.state = 173;
+	        this.printSequence();
+	        this.state = 174;
+	        this.match(babyduckParser.RightParen);
+	        this.state = 175;
 	        this.match(babyduckParser.Semi);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -723,7 +726,7 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 176;
+	        this.state = 179;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 13:
@@ -732,23 +735,23 @@ export default class babyduckParser extends antlr4.Parser {
 	        case 22:
 	        case 32:
 	        case 33:
-	            this.state = 174;
+	            this.state = 177;
 	            this.expression();
 	            break;
 	        case 31:
-	            this.state = 175;
+	            this.state = 178;
 	            this.match(babyduckParser.CteString);
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
 	        }
-	        this.state = 180;
+	        this.state = 183;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===28) {
-	            this.state = 178;
+	            this.state = 181;
 	            this.match(babyduckParser.Comma);
-	            this.state = 179;
+	            this.state = 182;
 	            this.printSequence();
 	        }
 
@@ -774,13 +777,13 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 182;
-	        this.exp();
 	        this.state = 185;
+	        this.exp();
+	        this.state = 188;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 3670016) !== 0)) {
-	            this.state = 183;
+	            this.state = 186;
 	            _la = this._input.LA(1);
 	            if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 3670016) !== 0))) {
 	            this._errHandler.recoverInline(this);
@@ -789,7 +792,7 @@ export default class babyduckParser extends antlr4.Parser {
 	            	this._errHandler.reportMatch(this);
 	                this.consume();
 	            }
-	            this.state = 184;
+	            this.state = 187;
 	            this.exp();
 	        }
 
@@ -814,21 +817,21 @@ export default class babyduckParser extends antlr4.Parser {
 	    this.enterRule(localctx, 32, babyduckParser.RULE_exp);
 	    var _la = 0;
 	    try {
-	        this.state = 192;
+	        this.state = 195;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,17,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 187;
+	            this.state = 190;
 	            this.termino();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 188;
+	            this.state = 191;
 	            this.termino();
-	            this.state = 189;
+	            this.state = 192;
 	            _la = this._input.LA(1);
 	            if(!(_la===14 || _la===15)) {
 	            this._errHandler.recoverInline(this);
@@ -837,7 +840,7 @@ export default class babyduckParser extends antlr4.Parser {
 	            	this._errHandler.reportMatch(this);
 	                this.consume();
 	            }
-	            this.state = 190;
+	            this.state = 193;
 	            this.exp();
 	            break;
 
@@ -863,21 +866,21 @@ export default class babyduckParser extends antlr4.Parser {
 	    this.enterRule(localctx, 34, babyduckParser.RULE_termino);
 	    var _la = 0;
 	    try {
-	        this.state = 199;
+	        this.state = 202;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,18,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 194;
+	            this.state = 197;
 	            this.factor();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 195;
+	            this.state = 198;
 	            this.factor();
-	            this.state = 196;
+	            this.state = 199;
 	            _la = this._input.LA(1);
 	            if(!(_la===16 || _la===17)) {
 	            this._errHandler.recoverInline(this);
@@ -886,7 +889,7 @@ export default class babyduckParser extends antlr4.Parser {
 	            	this._errHandler.reportMatch(this);
 	                this.consume();
 	            }
-	            this.state = 197;
+	            this.state = 200;
 	            this.termino();
 	            break;
 
@@ -911,16 +914,16 @@ export default class babyduckParser extends antlr4.Parser {
 	    let localctx = new FactorContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 36, babyduckParser.RULE_factor);
 	    try {
-	        this.state = 206;
+	        this.state = 209;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 22:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 201;
+	            this.state = 204;
 	            this.match(babyduckParser.LeftParen);
-	            this.state = 202;
+	            this.state = 205;
 	            this.expression();
-	            this.state = 203;
+	            this.state = 206;
 	            this.match(babyduckParser.RightParen);
 	            break;
 	        case 13:
@@ -929,7 +932,7 @@ export default class babyduckParser extends antlr4.Parser {
 	        case 32:
 	        case 33:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 205;
+	            this.state = 208;
 	            this.factorSequence();
 	            break;
 	        default:
@@ -957,11 +960,11 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 209;
+	        this.state = 212;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===14 || _la===15) {
-	            this.state = 208;
+	            this.state = 211;
 	            _la = this._input.LA(1);
 	            if(!(_la===14 || _la===15)) {
 	            this._errHandler.recoverInline(this);
@@ -972,16 +975,16 @@ export default class babyduckParser extends antlr4.Parser {
 	            }
 	        }
 
-	        this.state = 213;
+	        this.state = 216;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 13:
-	            this.state = 211;
+	            this.state = 214;
 	            this.match(babyduckParser.Identifier);
 	            break;
 	        case 32:
 	        case 33:
-	            this.state = 212;
+	            this.state = 215;
 	            this.cte();
 	            break;
 	        default:
@@ -1009,7 +1012,7 @@ export default class babyduckParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 215;
+	        this.state = 218;
 	        _la = this._input.LA(1);
 	        if(!(_la===32 || _la===33)) {
 	        this._errHandler.recoverInline(this);
@@ -1132,8 +1135,15 @@ class ProgramaContext extends antlr4.ParserRuleContext {
 	    return this.getToken(babyduckParser.End, 0);
 	};
 
-	vars() {
-	    return this.getTypedRuleContext(VarsContext,0);
+	vars = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(VarsContext);
+	    } else {
+	        return this.getTypedRuleContext(VarsContext,i);
+	    }
 	};
 
 	funcs = function(i) {

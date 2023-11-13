@@ -203,7 +203,7 @@ class SemanticChecker {
   constructor() {}
 
   transformAntlrToArray(matchedString, start, end) {
-    const matchedStr = matchedString.slice(start, end);
+    const matchedStr = matchedString.slice(start, end + 1);
 
     const typedString = matchedStr.map((token) => {
       return { name: token.text, type: TokenTypeNames[token.type] };

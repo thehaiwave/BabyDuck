@@ -26,6 +26,10 @@ class Stack {
       return this.items.map((item) => item.name);
     }
   }
+
+  length() {
+    return this.items.length;
+  }
 }
 
 export default Stack;
