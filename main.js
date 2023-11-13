@@ -3,6 +3,7 @@ import fs from "fs";
 import babyduckLexer from "./parser/babyduckLexer.js";
 import babyduckParser from "./parser/babyduckParser.js";
 import Porfavor from "./syntactic_analyzer/porfavor.js";
+import Memory from "./syntactic_analyzer/memory.js";
 
 const input = fs.readFileSync("fibo.babyduck", "utf-8");
 const chars = new antlr4.InputStream(input);
@@ -11,15 +12,13 @@ const tokens = new antlr4.CommonTokenStream(lexer);
 const parser = new babyduckParser(tokens);
 const tree = parser.programa();
 
+const memory = new Memory();
 const tokenObjects = tokens.tokens;
-// const tokenStrings = tokenObjects.map((token) => token.text);
 
-const listener = new Porfavor(tokenObjects);
+const listener = new Porfavor(tokenObjects, memory);
 
 antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
-// console.log("== Tabla de Variables ==");
-// console.log(listener.varTableInstance.getVariables());
+const quads = listener.getQuadruples();
 
-// console.log("\n== Dir de Funciones ==");
-// console.log(listener.funcDir.getVariables());
+console.log("them=", quads);

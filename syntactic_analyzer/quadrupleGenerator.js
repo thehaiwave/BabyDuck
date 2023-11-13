@@ -19,25 +19,28 @@ class QuadrupleGenerator {
   }
 
   addToQuadruple(quad) {
-    const elements = [];
     quad.forEach((subarray) => {
       this.globalQuadruples.push(subarray);
     });
   }
 
-  genAssignQuadruple(tokenArray) {
+  genAssignQuadruple(tokenArray, memCallback) {
     const quadruplesQ = [];
     const operatorStack = new Stack();
     const operandStack = new Stack();
 
     const addQuadruple = (operandStack, operatorStack) => {
-      const second = operandStack.pop().name;
-      const first = operandStack.pop().name;
-      const op = operatorStack.pop().name;
+      const second = operandStack.pop();
+      const first = operandStack.pop();
+      const op = operatorStack.pop();
+
+      let returnType = memCallback.checkMemoryTypes(op, first, second);
       const tempVar = this.genTempId();
 
+      memCallback.insertTempVariable(tempVar, returnType);
+
       operandStack.push({ type: "Identifier", name: tempVar });
-      quadruplesQ.push([op, first, second, tempVar]);
+      quadruplesQ.push([op.name, first.name, second.name, tempVar]);
     };
 
     function evalLeft() {
@@ -49,12 +52,6 @@ class QuadrupleGenerator {
         addQuadruple(operandStack, operatorStack);
       }
     }
-
-    // console.log(
-    //   "\n============================================================================="
-    // );
-
-    // console.log("GENERATING QUADRUPLE FOR =", tokenArray);
 
     for (let token of tokenArray) {
       const { type } = token;
@@ -97,22 +94,18 @@ class QuadrupleGenerator {
       addQuadruple(operandStack, operatorStack);
     }
 
-    const tempVar = this.genTempId();
+    // const tempVar = this.genTempId();
 
-    const second = operandStack.pop().name;
-    const first = operandStack.pop().name;
-    operandStack.push({ type: "Identifier", name: tempVar });
-    quadruplesQ.push(["=", first, second]);
+    // console.log(tempVar);
+    const second = operandStack.pop();
+    const first = operandStack.pop();
+    memCallback.checkMemoryTypes({ name: "=", type: "=" }, first, second);
+    // operandStack.push({ type: "Identifier", name: tempVar });
+    quadruplesQ.push(["=", first.name, second.name]);
     this.addToQuadruple(quadruplesQ);
-
-    // console.log("THE QUADRUPLE = ", quadruplesQ);
-
-    // console.log(
-    //   "\n============================================================================="
-    // );
   }
 
-  genExpressionQuadruple(tokenArray) {
+  genExpressionQuadruple(tokenArray, memCallback) {
     if (tokenArray.length === 1) {
       return tokenArray[0].name;
     }
@@ -123,14 +116,16 @@ class QuadrupleGenerator {
     let latestTempVar = 0;
 
     const addQuadruple = (operandStack, operatorStack) => {
-      const second = operandStack.pop().name;
-      const first = operandStack.pop().name;
-      const op = operatorStack.pop().name;
+      const second = operandStack.pop();
+      const first = operandStack.pop();
+      const op = operatorStack.pop();
       const tempVar = this.genTempId();
       latestTempVar = tempVar;
+      let returnType = memCallback.checkMemoryTypes(op, first, second);
+      memCallback.insertTempVariable(tempVar, returnType);
 
       operandStack.push({ type: "Identifier", name: tempVar });
-      quadruplesQ.push([op, first, second, tempVar]);
+      quadruplesQ.push([op.name, first.name, second.name, tempVar]);
     };
 
     function evalLeft() {
@@ -142,12 +137,6 @@ class QuadrupleGenerator {
         addQuadruple(operandStack, operatorStack);
       }
     }
-
-    // console.log(
-    //   "\n============================================================================="
-    // );
-
-    // console.log("GENERATING QUADRUPLE FOR =", tokenArray);
 
     for (let token of tokenArray) {
       const { type } = token;
@@ -193,19 +182,6 @@ class QuadrupleGenerator {
     this.addToQuadruple(quadruplesQ);
 
     return latestTempVar;
-
-    // const tempVar = tempId.next().value;
-
-    // const second = operandStack.pop().name;
-    // const first = operandStack.pop().name;
-    // operandStack.push({ type: "Identifier", name: tempVar });
-    // quadruplesQ.push(["=", first, second]);
-
-    // console.log("THE QUADRUPLE = ", quadruplesQ);
-
-    // console.log(
-    //   "\n============================================================================="
-    // );
   }
 
   genPrintQuadruple(tokenArray) {
@@ -219,6 +195,10 @@ class QuadrupleGenerator {
     });
 
     console.log("d", lol);
+  }
+
+  getQuadruples() {
+    return this.globalQuadruples;
   }
 
   genIfElse(tokenArray) {
