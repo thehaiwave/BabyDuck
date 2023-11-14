@@ -2,7 +2,7 @@ program FibonacciCalculator;
     var n, first, second, next, count: int;
 
     main {
-        n = 10; 
+        n = 50; 
         first = 0;
         second = 1;
         count = 0;

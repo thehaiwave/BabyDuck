@@ -6,7 +6,7 @@ import Porfavor from "./syntactic_analyzer/porfavor.js";
 import Memory from "./syntactic_analyzer/memory.js";
 import Ayuda from "./Runner.js";
 
-const input = fs.readFileSync("factorial.babyduck", "utf-8");
+const input = fs.readFileSync("fibo.babyduck", "utf-8");
 const chars = new antlr4.InputStream(input);
 const lexer = new babyduckLexer(chars);
 const tokens = new antlr4.CommonTokenStream(lexer);

@@ -34,17 +34,14 @@ class Ayuda {
         this.memory.addSum(quad[1], quad[2], quad[3]);
         this.currentQuad++;
         break;
-
       case "-":
         this.memory.sub(quad[1], quad[2], quad[3]);
         this.currentQuad++;
         break;
-
       case "<":
         this.memory.comparison(quad[1], quad[2], quad[3]);
         this.currentQuad++;
         break;
-
       case ">":
         this.memory.gte(quad[1], quad[2], quad[3]);
         this.currentQuad++;
@@ -53,7 +50,6 @@ class Ayuda {
         this.memory.mul(quad[1], quad[2], quad[3]);
         this.currentQuad++;
         break;
-
       case "GOTOF":
         let ret = this.memory.gotocond(quad[1]);
 
@@ -62,9 +58,7 @@ class Ayuda {
         } else {
           this.currentQuad++;
         }
-
         break;
-
       case "GOTOV":
         let ret2 = this.memory.gotocond(quad[1]);
 
@@ -73,7 +67,6 @@ class Ayuda {
         } else {
           this.currentQuad++;
         }
-
         break;
       case "GOTO":
         this.currentQuad = quad[2];
