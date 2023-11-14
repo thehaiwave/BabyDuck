@@ -2,7 +2,7 @@ program FactorialCalculator;
     var number, result: int;
 
     main {
-        number = 5; 
+        number = 10;
         result = 1;
 
         while {

@@ -229,6 +229,45 @@ class Memory {
       console.log(symbol.value);
     }
   }
+
+  mul(first, second, temp) {
+    const firstSymbol = this.resolve(first);
+    const secondSymbol = this.resolve(second);
+    const tempSymbol = this.resolve(temp);
+
+    if (!firstSymbol || secondSymbol === undefined) {
+      throw new Error("Variable not declared");
+    }
+
+    const mul = firstSymbol.value * secondSymbol.value;
+    tempSymbol.value = mul;
+  }
+
+  sub(first, second, temp) {
+    const firstSymbol = this.resolve(first);
+    const secondSymbol = this.resolve(second);
+    const tempSymbol = this.resolve(temp);
+
+    if (!firstSymbol || secondSymbol === undefined) {
+      throw new Error("Variable not declared");
+    }
+
+    const sub = firstSymbol.value - secondSymbol.value;
+    tempSymbol.value = sub;
+  }
+
+  gte(first, second, temp) {
+    const firstSymbol = this.resolve(first);
+    const secondSymbol = this.resolve(second);
+    const tempSymbol = this.resolve(temp);
+
+    if (!firstSymbol || secondSymbol === undefined) {
+      throw new Error("Variable not declared");
+    }
+
+    const gte = firstSymbol.value > secondSymbol.value;
+    tempSymbol.value = gte;
+  }
 }
 
 export default Memory;
