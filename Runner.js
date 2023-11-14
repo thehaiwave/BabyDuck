@@ -1,47 +1,73 @@
-class IRInterpreter {
-  constructor(quadruples) {
+class Ayuda {
+  constructor(quadruples, memory) {
     this.quadruples = quadruples;
-    this.variables = {};
+    this.memory = memory;
     this.currentQuad = 0;
   }
 
   run() {
     while (this.currentQuad < this.quadruples.length) {
       const quad = this.quadruples[this.currentQuad];
+      if (this.currentQuad === null) {
+        break;
+      }
       this.executeQuadruple(quad);
     }
   }
 
   executeQuadruple(quad) {
-    const [op, arg1, arg2, result] = quad;
+    const op = quad[0];
 
     switch (op) {
       case "GOTO":
-        this.currentQuad = arg2 - 1;
-        break;
-      case "GOTOF":
-        if (!this.resolve(arg1)) {
-          this.currentQuad = arg2 - 1;
-        }
+        this.currentQuad = quad[2];
         break;
       case "=":
-        this.variables[result] = this.resolve(arg1);
-        break;
-      case "+":
-        this.variables[result] = this.resolve(arg1) + this.resolve(arg2);
-        break;
-      case "<":
-        this.variables[result] = this.resolve(arg1) < this.resolve(arg2);
+        this.memory.assignMemory(quad[1], quad[2]);
+        this.currentQuad++;
         break;
       case "PRINT":
-        console.log(this.resolve(arg1));
+        this.memory.print(quad[1]);
+        this.currentQuad++;
         break;
-      // Add cases for other operations if needed
-      default:
+      case "+":
+        this.memory.addSum(quad[1], quad[2], quad[3]);
+        this.currentQuad++;
+        break;
+
+      case "<":
+        this.memory.comparison(quad[1], quad[2], quad[3]);
+        this.currentQuad++;
+        break;
+
+      case "GOTOF":
+        let ret = this.memory.gotocond(quad[1]);
+
+        if (ret === false) {
+          this.currentQuad = quad[2];
+        } else {
+          this.currentQuad++;
+        }
+
+        break;
+
+      case "GOTOV":
+        let ret2 = this.memory.gotocond(quad[1]);
+
+        if (ret2 === true) {
+          this.currentQuad = quad[2];
+        } else {
+          this.currentQuad++;
+        }
+
+        break;
+      case "GOTO":
+        this.currentQuad = quad[2];
+        break;
+      case "ENDPROG":
+        this.currentQuad = null;
         break;
     }
-
-    this.currentQuad++;
   }
 
   resolve(arg) {
@@ -55,55 +81,4 @@ class IRInterpreter {
   }
 }
 
-// Example usage
-const quadruples = [
-  ["GOTO", null, 1],
-  ["=", "n", "10"],
-  ["=", "first", "0"],
-  ["=", "second", "1"],
-  ["=", "count", "0"],
-  ["PRINT", '"Fibonacci sequence: "'],
-  ["+", "first", "second", "t4"],
-  ["=", "next", "t4"],
-  ["<", "count", "2", "t6"],
-  ["GOTOF", "t6", 13],
-  ["PRINT", "count"],
-  ["PRINT", '" "'],
-  ["GOTO", null, 17],
-  ["PRINT", "next"],
-  ["PRINT", '" "'],
-  ["=", "first", "second"],
-  ["=", "second", "next"],
-  ["+", "count", "1", "t9"],
-  ["=", "count", "t9"],
-  ["+", "n", "1", "t11"],
-  ["<", "count", "t11", "t12"],
-  ["GOTOV", "t12", 6],
-];
-
-// [ 'GOTO', null, 1 ]
-// [ '=', 'n', '10' ]
-// [ '=', 'first', '0' ]
-// [ '=', 'second', '1' ]
-// [ '=', 'count', '0' ]
-// [ 'PRINT', '"Fibonacci sequence: "' ]
-// [ '+', 'first', 'second', 't0' ]
-// [ '=', 'next', 't0' ]
-// [ '<', 'count', '2', 't1' ]
-// [ 'GOTOF', 't1', 13 ]
-// [ 'PRINT', 'count' ]
-// [ 'PRINT', '" "' ]
-// [ 'GOTO', null, 17 ]
-// [ 'PRINT', 'next' ]
-// [ 'PRINT', '" "' ]
-// [ '=', 'first', 'second' ]
-// [ '=', 'second', 'next' ]
-// [ '+', 'count', '1', 't2' ]
-// [ '=', 'count', 't2' ]
-// [ '+', 'n', '1', 't3' ]
-// [ '<', 'count', 't3', 't4' ]
-// [ 'GOTOV', 't4', 6 ]
-// [ 'ENDPROG' ]
-
-const interpreter = new IRInterpreter(quadruples);
-interpreter.run();
+export default Ayuda;

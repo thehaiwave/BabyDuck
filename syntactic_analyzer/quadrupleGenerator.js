@@ -1,6 +1,4 @@
-import Queue from "../data_structures/queue.js";
 import Stack from "../data_structures/stack.js";
-import { semanticCube } from "./semanticChecker.js";
 
 class QuadrupleGenerator {
   constructor() {
@@ -9,10 +7,6 @@ class QuadrupleGenerator {
     this.currentTemp = 0;
     this.loopStartIndex = 0;
   }
-
-  genProgramaStart() {}
-
-  genProgramaEnd() {}
 
   genTempId() {
     return "t" + this.currentTemp++;
@@ -94,13 +88,10 @@ class QuadrupleGenerator {
       addQuadruple(operandStack, operatorStack);
     }
 
-    // const tempVar = this.genTempId();
-
-    // console.log(tempVar);
     const second = operandStack.pop();
     const first = operandStack.pop();
     memCallback.checkMemoryTypes({ name: "=", type: "=" }, first, second);
-    // operandStack.push({ type: "Identifier", name: tempVar });
+
     quadruplesQ.push(["=", first.name, second.name]);
     this.addToQuadruple(quadruplesQ);
   }
@@ -185,7 +176,6 @@ class QuadrupleGenerator {
   }
 
   genPrintQuadruple(tokenArray) {
-    const quadruplesQ = [];
     console.log(tokenArray);
 
     const lol = tokenArray.map((seq) => {
@@ -193,50 +183,10 @@ class QuadrupleGenerator {
         return seq.name;
       }
     });
-
-    console.log("d", lol);
   }
 
   getQuadruples() {
     return this.globalQuadruples;
-  }
-
-  genIfElse(tokenArray) {
-    console.log("IF-CONDITION=", tokenArray[2].getText());
-    console.log;
-  }
-
-  genCycleQuadruple() {}
-
-  genFCallQuadruple() {}
-
-  generateQuadruple(tokenArray, tokenType) {
-    switch (tokenType) {
-      case "assign":
-        this.genAssignQuadruple(tokenArray);
-        break;
-      case "print":
-        this.genPrintQuadruple(tokenArray);
-        break;
-      case "if":
-        console.log("case");
-        break;
-      case "ifElse":
-        this.genIfElse(tokenArray);
-        break;
-      case "cycle":
-        console.log("case");
-        break;
-      case "f_call":
-        console.log("case");
-        break;
-    }
-  }
-
-  printQuadruples() {
-    const damn = this.globalQuadruples.map((element, i) =>
-      console.log(element)
-    );
   }
 
   insertQuadruple(quad) {

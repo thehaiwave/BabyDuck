@@ -1,34 +1,3 @@
-const Type = {
-  INT: "int",
-  FLOAT: "float",
-  BOOL: "bool",
-  ERROR: "error",
-};
-
-export const Operation = {
-  ADD: "+",
-  SUB: "-",
-  MUL: "*",
-  DIV: "/",
-  ASSIGN: "=",
-  NOT_EQUAL: "!=",
-  GREATER: ">",
-  LESS: "<",
-};
-
-function getPrecedence(op) {
-  switch (op) {
-    case Operation.ADD:
-    case Operation.SUB:
-      return 1;
-    case Operation.MUL:
-    case Operation.DIV:
-      return 2;
-    default:
-      return 0;
-  }
-}
-
 export const semanticCube = {
   int: {
     int: {

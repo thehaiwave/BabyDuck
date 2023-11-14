@@ -4,6 +4,7 @@ import babyduckLexer from "./parser/babyduckLexer.js";
 import babyduckParser from "./parser/babyduckParser.js";
 import Porfavor from "./syntactic_analyzer/porfavor.js";
 import Memory from "./syntactic_analyzer/memory.js";
+import Ayuda from "./Runner.js";
 
 const input = fs.readFileSync("fibo.babyduck", "utf-8");
 const chars = new antlr4.InputStream(input);
@@ -20,6 +21,5 @@ const listener = new Porfavor(tokenObjects, memory);
 antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
 const quads = listener.getQuadruples();
-
-console.log("them=", quads);
-console.log(memory.printMemory());
+const runner = new Ayuda(quads, memory);
+runner.run(quads, memory);

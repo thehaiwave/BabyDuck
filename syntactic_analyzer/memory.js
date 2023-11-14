@@ -2,12 +2,7 @@ import { semanticCube } from "./semanticChecker.js";
 
 class Memory {
   constructor() {
-    this.intMemory = {};
-    this.floatMemory = {};
-    this.temporalIntMemory = {};
-    this.temporalFloatMemory = {};
-    this.temporalBoolMemory = {};
-    this.funcMemory = {};
+    this.memory = {};
     this.intCounter = 0;
     this.intUpper = 999;
     this.floatCounter = 1000;
@@ -25,16 +20,8 @@ class Memory {
       return "int";
     } else if (symbol.type === "CteFloat") {
       return "float";
-    } else if (this.intMemory[symbol.name]) {
-      return this.intMemory[symbol.name].type;
-    } else if (this.floatMemory[symbol.name]) {
-      return this.floatMemory[symbol.name].type;
-    } else if (this.temporalIntMemory[symbol.name]) {
-      return this.temporalIntMemory[symbol.name].type;
-    } else if (this.temporalFloatMemory[symbol.name]) {
-      return this.temporalFloatMemory[symbol.name].type;
-    } else if (this.temporalBoolMemory[symbol.name]) {
-      return this.temporalBoolMemory[symbol.name].type;
+    } else if (this.memory[symbol.name]) {
+      return this.memory[symbol.name].type;
     } else {
       return null;
     }
@@ -45,13 +32,13 @@ class Memory {
 
     switch (type) {
       case "int":
-        this.temporalIntMemory[obj.name] = obj;
+        this.memory[obj.name] = obj;
         break;
       case "float":
-        this.temporalFloatMemory[obj.name] = obj;
+        this.memory[obj.name] = obj;
         break;
       case "bool":
-        this.temporalBoolMemory[obj.name] = obj;
+        this.memory[obj.name] = obj;
         break;
     }
   }
@@ -131,19 +118,19 @@ class Memory {
 
     switch (type) {
       case "int":
-        this.intMemory[obj.name] = obj;
+        this.memory[obj.name] = obj;
         break;
       case "float":
-        this.floatMemory[obj.name] = obj;
+        this.memory[obj.name] = obj;
         break;
     }
   }
 
   validateSymbol(name) {
-    if (this.intMemory[name] || this.floatMemory[name]) {
+    if (this.memory[name] || this.memory[name]) {
       if (
-        this.intMemory[name]?.context === this.currentContext ||
-        this.floatMemory[name]?.context === this.currentContext
+        this.memory[name]?.context === this.currentContext ||
+        this.memory[name]?.context === this.currentContext
       ) {
         throw new Error("Variable already declared in this context");
       }
@@ -166,11 +153,81 @@ class Memory {
   }
 
   printMemory() {
-    console.log("Int memory: ", this.intMemory);
-    console.log("Float memory: ", this.floatMemory);
-    console.log("Temporal int memory: ", this.temporalIntMemory);
-    console.log("Temporal float memory: ", this.temporalFloatMemory);
-    console.log("Temporal bool memory: ", this.temporalBoolMemory);
+    console.log("Int memory: ", this.memory);
+  }
+
+  resolve(symbol) {
+    if (!isNaN(symbol)) {
+      return { value: +symbol };
+    } else if (this.memory[symbol]) {
+      return this.memory[symbol];
+    } else {
+      return null;
+    }
+  }
+
+  assignMemory(first, second) {
+    const firstSymbol = this.resolve(first);
+    const secondSymbol = this.resolve(second);
+
+    if (!firstSymbol || secondSymbol === undefined) {
+      throw new Error("Variable not declared");
+    }
+    let valueToAssign;
+
+    if (typeof secondSymbol === "object") {
+      valueToAssign = secondSymbol.value;
+    } else {
+      valueToAssign = secondSymbol;
+    }
+
+    firstSymbol.value = valueToAssign;
+  }
+
+  addSum(first, second, temp) {
+    const firstSymbol = this.resolve(first);
+    const secondSymbol = this.resolve(second);
+    const tempSymbol = this.resolve(temp);
+
+    if (!firstSymbol || secondSymbol === undefined) {
+      throw new Error("Variable not declared");
+    }
+
+    const sum = firstSymbol.value + secondSymbol.value;
+    tempSymbol.value = sum;
+  }
+
+  comparison(first, second, temp) {
+    const firstSymbol = this.resolve(first);
+    const secondSymbol = this.resolve(second);
+    const tempSymbol = this.resolve(temp);
+
+    if (!firstSymbol || secondSymbol === undefined) {
+      throw new Error("Variable not declared");
+    }
+
+    const comp = firstSymbol.value < secondSymbol.value;
+    tempSymbol.value = comp;
+  }
+
+  gotocond(temp) {
+    const tempSymbol = this.resolve(temp);
+
+    if (!tempSymbol) {
+      throw new Error("Variable not declared");
+    }
+
+    return tempSymbol.value;
+  }
+
+  print(element) {
+    const symbol = this.resolve(element);
+
+    if (!symbol) {
+      console.log(element);
+    } else {
+      console.log(symbol.value);
+    }
   }
 }
 

@@ -134,8 +134,6 @@ class Porfavor extends babyduckListener {
     this.currentContext = null;
   }
 
-  exitStatement(ctx) {}
-
   enterPrint(ctx) {
     if (!ctx) return;
 
