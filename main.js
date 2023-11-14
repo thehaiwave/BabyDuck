@@ -22,3 +22,4 @@ antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 const quads = listener.getQuadruples();
 
 console.log("them=", quads);
+console.log(memory.printMemory());
