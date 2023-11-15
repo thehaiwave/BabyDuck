@@ -15,18 +15,25 @@ const parser = new babyduckParser(tokens);
 
 const tree = parser.programa();
 
+// throw syntax error before proceeding with tree alk
 if (tree.exception || parser._syntaxErrors) {
   throw new Error("Syntax error");
 }
 
+// initialize memory
 const memory = new Memory();
+// get global tokens
 const tokenObjects = tokens.tokens;
 
+// initialize listener
 const listener = new Porfavor(tokenObjects, memory);
-
 antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
+// get quadruples back from listener
 const quads = listener.getQuadruples();
 console.table(quads);
+
+// initialize runner
 const runner = new Ayuda(quads, memory);
+// give it the quads and the memory
 runner.run(quads, memory);
