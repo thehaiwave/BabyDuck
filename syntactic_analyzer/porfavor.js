@@ -2,7 +2,6 @@ import Stack from "../data_structures/stack.js";
 import babyduckListener from "../parser/babyduckListener.js";
 import SemanticChecker from "./semanticChecker.js";
 import QuadrupleGenerator from "./quadrupleGenerator.js";
-import fs from "fs";
 
 class Porfavor extends babyduckListener {
   constructor(tokenObjects, memory) {
@@ -16,10 +15,6 @@ class Porfavor extends babyduckListener {
     this.currentContext = null;
     this.seenMain = false;
     this.startingElse = false;
-    this.seenIf = false;
-    this.seenElse = false;
-    this.letGotof = false;
-    this.ifCounter = 0;
   }
 
   getQuadruples() {
@@ -85,8 +80,6 @@ class Porfavor extends babyduckListener {
     }
   }
 
-  exitVars(ctx) {}
-
   enterFuncs(ctx) {
     this.currentContext = "FUNCTION";
   }
@@ -123,7 +116,6 @@ class Porfavor extends babyduckListener {
 
     const matchStart = ctx.start.tokenIndex;
     const matchEnd = ctx.stop.tokenIndex;
-    // const context = this.contextStack.top();
     const cleanArray = this.SemanticChecker.transformAntlrToArray(
       this.tokenObjects,
       matchStart,

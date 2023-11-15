@@ -175,16 +175,6 @@ class QuadrupleGenerator {
     return latestTempVar;
   }
 
-  genPrintQuadruple(tokenArray) {
-    console.log(tokenArray);
-
-    const lol = tokenArray.map((seq) => {
-      if (seq.type === "CteString") {
-        return seq.name;
-      }
-    });
-  }
-
   getQuadruples() {
     return this.globalQuadruples;
   }

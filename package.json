@@ -13,7 +13,7 @@
   "devDependencies": {},
   "scripts": {
     "compile": "node main.js",
-    "test": "node tester.js",
+    "test": "node ./tests/tester.js",
     "antlr": "antlr4 -Dlanguage=JavaScript babyduck.g4 -o parser/"
   },
   "author": "",

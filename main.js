@@ -21,6 +21,5 @@ const listener = new Porfavor(tokenObjects, memory);
 antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
 const quads = listener.getQuadruples();
-//console.log(quads);
 const runner = new Ayuda(quads, memory);
 runner.run(quads, memory);

@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
 import antlr4 from "antlr4";
-import babyduckLexer from "./parser/babyduckLexer.js";
-import babyduckParser from "./parser/babyduckParser.js";
+import babyduckLexer from "../parser/babyduckLexer.js";
+import babyduckParser from "../parser/babyduckParser.js";
 
-const TEST_DIR = "./tests";
+const TEST_DIR = process.cwd() + /tests/ + /inputs/;
 
 const tester = () => {
   const statusObject = {};
