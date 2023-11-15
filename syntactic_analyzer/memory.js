@@ -13,6 +13,8 @@ class Memory {
     this.temporalIntUpper = 3999;
     this.temporalFloatCounter = 4000;
     this.temporalFloatUpper = 4999;
+    this.funcCounter = 5000;
+    this.funcUpper = 5999;
   }
 
   resolveVar(symbol) {
@@ -243,6 +245,19 @@ class Memory {
     tempSymbol.value = mul;
   }
 
+  div(first, second, temp) {
+    const firstSymbol = this.resolve(first);
+    const secondSymbol = this.resolve(second);
+    const tempSymbol = this.resolve(temp);
+
+    if (!firstSymbol || secondSymbol === undefined) {
+      throw new Error("Variable not declared");
+    }
+
+    const div = firstSymbol.value / secondSymbol.value;
+    tempSymbol.value = div;
+  }
+
   sub(first, second, temp) {
     const firstSymbol = this.resolve(first);
     const secondSymbol = this.resolve(second);
@@ -267,6 +282,40 @@ class Memory {
 
     const gte = firstSymbol.value > secondSymbol.value;
     tempSymbol.value = gte;
+  }
+
+  getFuncMemoryAddress() {
+    if (this.funcCounter < this.funcUpper) {
+      return this.funcCounter++;
+    } else {
+      throw new Error("Out of memory");
+    }
+  }
+  insertFunc(name, obj) {
+    if (this.memory?.[name] !== undefined) {
+      throw new Error(`Function name has already been declared.`);
+    }
+
+    const addr = this.getFuncMemoryAddress();
+
+    this.memory[name] = { ...obj, addr: addr };
+  }
+
+  checkArgType(argType, funcName, currentArg) {
+    const funcArgs = this.memory[funcName]?.args;
+
+    if (!funcArgs) {
+      throw new Error("Function does not exist.");
+    }
+    const funcArgNames = Object.values(funcArgs);
+
+    if (currentArg >= funcArgNames.length) {
+      throw new Error("Too many arguments for function.");
+    }
+
+    if (argType !== funcArgNames[currentArg].type) {
+      throw new Error("Argument type does not match function argument type.");
+    }
   }
 }
 

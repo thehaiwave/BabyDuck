@@ -50,6 +50,22 @@ class Ayuda {
         this.memory.mul(quad[1], quad[2], quad[3]);
         this.currentQuad++;
         break;
+      case "/":
+        this.memory.div(quad[1], quad[2], quad[3]);
+        this.currentQuad++;
+        break;
+      case "ERA":
+        this.currentQuad++;
+        break;
+      case "ENDFUNC":
+        this.currentQuad++;
+        break;
+      case "PARAM":
+        this.currentQuad++;
+        break;
+      case "GOSUB":
+        this.currentQuad++;
+        break;
       case "GOTOF":
         let ret = this.memory.gotocond(quad[1]);
 

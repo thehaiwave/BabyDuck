@@ -1,5 +1,11 @@
 program FibonacciCalculator;
     var n, first, second, next, count: int;
+    void fooBar(foo: int, first: int)[{
+        print(foo);
+    }];
+    void funcBaz(foo: int, first: int)[{
+        print(foo);
+    }];
 
     main {
         n = 50; 
@@ -7,8 +13,8 @@ program FibonacciCalculator;
         second = 1;
         count = 0;
 
-        print("Fibonacci: ");
 
+        print("Fibonacci: ");
         while {
             next = first + second;
 

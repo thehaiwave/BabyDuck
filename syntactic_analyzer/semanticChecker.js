@@ -4,7 +4,7 @@ export const semanticCube = {
       "+": "int",
       "-": "int",
       "*": "int",
-      "/": "float",
+      "/": "int",
       "=": "int",
       "!=": "bool",
       ">": "bool",

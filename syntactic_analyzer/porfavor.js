@@ -36,10 +36,80 @@ class Porfavor extends babyduckListener {
     this.QuadrupleGenerator.insertQuadruple([
       ["ERA", ctx.Identifier().getText()],
     ]);
+
+    const matchStart = ctx.start.tokenIndex;
+    const matchEnd = ctx.stop.tokenIndex;
+    const funcName = ctx.Identifier().getText();
+
+    let cleanArray = this.SemanticChecker.transformAntlrToArray(
+      this.tokenObjects,
+      matchStart,
+      matchEnd
+    );
+    let currentArg = 0;
+    cleanArray = cleanArray.slice(2);
+    cleanArray.pop();
+    cleanArray.pop();
+    let lInd = 0;
+    let i = 0;
+    let cleanOne = [];
+
+    for (i = 0; i < cleanArray.length; i++) {
+      if (cleanArray[i].type === ",") {
+        let left = cleanArray.slice(lInd, i);
+        lInd = i + 1;
+
+        if (left[0].type === "CteString") {
+          throw new Error("Cannot pass string as argument");
+        }
+        if (left.length === 1 && left[0].type === "Identifier") {
+          cleanOne.push(left[0]);
+        } else {
+          cleanOne.push(left);
+        }
+      }
+    }
+
+    let left = cleanArray.slice(lInd, i);
+    lInd = i + 1;
+
+    if (left.length === 1 && left[0].type === "Identifier") {
+      cleanOne.push(left[0]);
+    } else {
+      cleanOne.push(left);
+    }
+
+    for (let j = 0; j < cleanOne.length; j++) {
+      if (Array.isArray(cleanOne[j])) {
+        let tempVarExp = this.QuadrupleGenerator.genExpressionQuadruple(
+          cleanOne[j],
+          this.Memory
+        );
+
+        this.Memory.checkArgType(
+          tempVarExp.latestTempVarType,
+          funcName,
+          currentArg
+        );
+
+        currentArg++;
+        this.QuadrupleGenerator.insertQuadruple([
+          ["PARAM", tempVarExp.latestTempVar],
+        ]);
+      } else {
+        let lookedUpType = this.Memory.resolveVar(cleanOne[j]);
+
+        this.Memory.checkArgType(lookedUpType, funcName, currentArg);
+
+        currentArg++;
+        this.QuadrupleGenerator.insertQuadruple([["PARAM", cleanOne[j].name]]);
+      }
+    }
+    this.QuadrupleGenerator.insertQuadruple([["GOSUB", funcName]]);
   }
 
   enterBody(ctx) {
-    if (this.seenMain === false && this.currentContext === null) {
+    if (this.seenMain === false && this.contextStack.top() === "PROGRAMA") {
       this.seenMain = true;
       this.contextStack.push("MAIN");
 
@@ -57,7 +127,8 @@ class Porfavor extends babyduckListener {
       this.QuadrupleGenerator.bringGoto(1);
 
       this.contextStack.pop();
-    } else if (this.contextStack.top() === "CYCLE") {
+    } else if (this.contextStack.top() === "FUNCTION") {
+      this.contextStack.pop();
     }
   }
 
@@ -81,12 +152,32 @@ class Porfavor extends babyduckListener {
   }
 
   enterFuncs(ctx) {
-    this.currentContext = "FUNCTION";
+    this.contextStack.push("FUNCTION");
+    const funcContext = ctx.parentCtx.Identifier().getText();
+    const funcName = ctx.Identifier().getText();
+    const funcArgs = {};
+
+    if (ctx.idTypeSequence()) {
+      let argQuant = ctx.idTypeSequence().Identifier().length;
+
+      for (let i = 0; i < argQuant; i++) {
+        let argName = ctx.idTypeSequence().Identifier()[i].getText();
+        let argType = ctx.idTypeSequence().type()[i].getText();
+        if (funcArgs?.[argName] !== undefined) {
+          throw new Error(`Duplicated argument name.`);
+        }
+        funcArgs[argName] = { type: argType, value: null };
+      }
+    }
+
+    this.Memory.insertFunc(funcName, {
+      args: funcArgs,
+      context: funcContext,
+    });
   }
 
   exitFuncs(ctx) {
     this.QuadrupleGenerator.insertQuadruple([["ENDFUNC"]]);
-    this.currentContext = null;
   }
 
   enterExpression(ctx) {
@@ -104,7 +195,12 @@ class Porfavor extends babyduckListener {
         cleanArray,
         this.Memory
       );
-      this.QuadrupleGenerator.setGoto([["GOTOF", res, null]]);
+
+      if (res.latestTempVarType !== "bool") {
+        throw new Error("Condition must be boolean");
+      }
+
+      this.QuadrupleGenerator.setGoto([["GOTOF", res.latestTempVar, null]]);
       this.currentContext = "IF";
     }
   }
@@ -177,7 +273,9 @@ class Porfavor extends babyduckListener {
           cleanOne[j],
           this.Memory
         );
-        this.QuadrupleGenerator.insertQuadruple([["PRINT", tempVarExp]]);
+        this.QuadrupleGenerator.insertQuadruple([
+          ["PRINT", tempVarExp.latestTempVar],
+        ]);
       } else {
         this.QuadrupleGenerator.insertQuadruple([["PRINT", cleanOne[j].name]]);
       }
@@ -203,7 +301,11 @@ class Porfavor extends babyduckListener {
       this.Memory
     );
 
-    this.QuadrupleGenerator.genConditionalJumpBack(res);
+    if (res.latestTempVarType !== "bool") {
+      throw new Error("Condition must be boolean");
+    }
+
+    this.QuadrupleGenerator.genConditionalJumpBack(res.latestTempVar);
     this.contextStack.pop();
   }
 

@@ -105,6 +105,7 @@ class QuadrupleGenerator {
     const operatorStack = new Stack();
     const operandStack = new Stack();
     let latestTempVar = 0;
+    let latestTempVarType = null;
 
     const addQuadruple = (operandStack, operatorStack) => {
       const second = operandStack.pop();
@@ -113,6 +114,7 @@ class QuadrupleGenerator {
       const tempVar = this.genTempId();
       latestTempVar = tempVar;
       let returnType = memCallback.checkMemoryTypes(op, first, second);
+      latestTempVarType = returnType;
       memCallback.insertTempVariable(tempVar, returnType);
 
       operandStack.push({ type: "Identifier", name: tempVar });
@@ -172,7 +174,7 @@ class QuadrupleGenerator {
 
     this.addToQuadruple(quadruplesQ);
 
-    return latestTempVar;
+    return { latestTempVar, latestTempVarType };
   }
 
   getQuadruples() {
