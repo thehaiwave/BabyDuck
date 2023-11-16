@@ -6,7 +6,6 @@ import QuadrupleGenerator from "./quadrupleGenerator.js";
 class Porfavor extends babyduckListener {
   constructor(tokenObjects, memory) {
     super();
-    this.jumpStack = new Stack();
     this.tokenObjects = tokenObjects;
     this.contextStack = new Stack();
     this.QuadrupleGenerator = new QuadrupleGenerator();

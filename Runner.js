@@ -92,16 +92,6 @@ class Ayuda {
         break;
     }
   }
-
-  resolve(arg) {
-    if (typeof arg === "number" || !isNaN(arg)) {
-      return Number(arg);
-    } else if (this.variables[arg] !== undefined) {
-      return this.variables[arg];
-    } else {
-      throw new Error(`Undefined variable: ${arg}`);
-    }
-  }
 }
 
 export default Ayuda;
